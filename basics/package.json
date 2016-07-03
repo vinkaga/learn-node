@@ -1,0 +1,20 @@
+{
+  "name": "basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "start": "node src/server",
+    "test": "./node_modules/lab/bin/lab",
+    "coverage": "./node_modules/lab/bin/lab -c -t 80 -r html -o coverage.html --coverage-path ./src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "13.4.1"
+  },
+  "devDependencies": {
+    "code": "3.0.1",
+    "lab": "10.8.2"
+  }
+}
