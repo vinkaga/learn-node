@@ -9,6 +9,8 @@ Beginner to intermediate
 
 Vinay Agarwal
 
+[<img src="https://help.github.com/assets/images/site/invertocat.png">](https://github.com/vinkaga/learn-node)
+
 ---
 layout: false
 .left-column[
@@ -612,4 +614,5 @@ name: last-page
 template: inverse
 
 # The End
+Slideshow created using [remark](http://github.com/gnab/remark).
 
