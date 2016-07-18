@@ -3,13 +3,16 @@ layout: true
 class: center, middle, inverse
 ---
 # NodeJS and JavaScript for 2016 Onwards
-Server side JavaScript for API development
+Server side JavaScript (NodeJS 6) for API development
 
 Beginner to intermediate
 
 Vinay Agarwal
 
+Licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
+
 [<img src="https://help.github.com/assets/images/site/invertocat.png">](https://github.com/vinkaga/learn-node)
+
 
 ---
 layout: false
@@ -22,13 +25,15 @@ layout: false
 
 - Uses PHP and Java for reference
 
-- Will not go into obvious stuff - easily guessed or Googled.
+- Will not go into obvious stuff - easily guessed or Googled
 
 - Will not go into historical constructs.
 
-- Focused on high performance and maintainability.
+- Focused on high performance and maintainability
 
-- Uses Hapi framework.
+- Uses Hapi framework
+
+- Benchmark data from [vinkaga/node6perf](https://github.com/vinkaga/node6perf)
 
 - Opinionated :-)
 
@@ -36,19 +41,19 @@ layout: false
 ---
 template: inverse
 
-# The Basics
+# 1. The Basics
 
 ---
 template: inverse
 
-# The Basics
+# 1. The Basics
 ## What is it?
 ## Why use it?
 
 ---
 layout: false
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ###What is it?
 ]
 .right-column[
@@ -56,13 +61,9 @@ layout: false
 
 - Dynamically typed
 
-- Single threaded
+- JIT (Just-In-Time) compiler: no compile step needed
 
-- ECMAScript 5.1 and 6
-
-- Full ES6 not yet supported (browsers or NodeJS)
-
-- TypeScript supports full ES6 (not discussed here)
+- ECMAScript 2015 (previously known as ES6). ES6 support is not yet complete.
 
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
@@ -74,13 +75,13 @@ layout: false
 
 - A general purpose language - not a server
 
-- Current version 6.2.2 (mweb uses 0.12)
+- Current version 6.3.0. Supports almost all ES6 (https://kangax.github.io/compat-table/es6/)
 
 - https://nodejs.org/dist/latest-v6.x/docs/api/
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### What is it?
   ### Why use it?
 ]
@@ -94,22 +95,24 @@ Not too many languages are fun for humans as well as efficient for machines!
 ---
 template: inverse
 
-# The Basics
+# 1. The Basics
 ## Installing
-## Updating
 ## Running
 
 ---
 layout: false
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Installing
 ]
 .right-column[
 ####OS X
 
-- `brew install node`
-
+```
+brew update
+brew upgrade
+brew install node
+```
 ####Windows
 
 - Windows Installer at https://nodejs.org/en/download/
@@ -119,26 +122,20 @@ layout: false
 - `curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -`
 
 - `sudo apt-get install -y nodejs`
+
+####Updating
+
+```
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+```
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Installing
-  ### Updating
-]
-.right-column[
-
-- `sudo npm cache clean -f`
-
-- `sudo npm install -g n`
-
-- `sudo n stable` or `sudo n 4.4.5`
-]
----
-.left-column[
-  ## The Basics
-  ### Installing
-  ### Updating
   ### Running
 ]
 .right-column[
@@ -157,21 +154,21 @@ console.log('hello world!');
 ```
 - Run with `node hello`
 ```
-~/p/nodejs $ node hello
+~/lean-node/basics $ node hello
 hello world!
 ```
 ]
 ---
 template: inverse
 
-# The Basics
+# 1. The Basics
 ## NPM - Node Package Manager
-Like `composer` but less painful
+Like PHP `composer` but less painful
 ---
 name: how
 
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### NPM
   #### - What?
 ]
@@ -190,15 +187,16 @@ name: how
 
  - holds all dependencies
 
-####Conventions
+####Best Practices
 
-- No equivalent of `composer.lock`
+- Use exact versions for dependencies. No equivalent of PHP `composer.lock`.
 
-- Use exact versions for dependencies/devDependencies
+- Include scripts - anyone knows how to run or test
+
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### NPM
   #### - What?
   #### - How?
@@ -232,7 +230,7 @@ name: how
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### NPM
   #### - What?
   #### - How?
@@ -261,11 +259,11 @@ npm ERR! Test failed.  See above for more details.
 ---
 template: inverse
 
-# The Basics
+# 1. The Basics
 ## Simple Server
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Simple Server
   #### - Editor
 ]
@@ -292,7 +290,7 @@ template: inverse
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Simple Server
   #### - Editor
   #### - Creating
@@ -333,7 +331,7 @@ server.start(function(err) {
 
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Simple Server
   #### - Editor
   #### - Creating
@@ -372,7 +370,7 @@ lab.experiment("Basic HTTP Tests", function() {
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 1. Basics
   ### Simple Server
   #### - Editor
   #### - Creating
@@ -395,35 +393,37 @@ lab.experiment("Basic HTTP Tests", function() {
 ---
 template: inverse
 
-# The Basics
-## Language
+# 2. NodeJS
+---
+template: inverse
+
+# 2. NodeJS
+## JavaScript Language
 ---
 .left-column[
-  ## The Basics
+  ## 2. NodeJS
   ### Language
   #### - Basics
 ]
 .right-column[
 
-- Scoped as expected: `const`, `let` - use them by default
+- Declaration: `const`, `let` - block scoped, preferred
 
-- Function scoped: `var` - used in legacy code
+- Function scoped declaration: `var` - used in legacy code
 
-- There is no `int` type, all numbers are `float`/`double`
+- There is no `int` type, all numbers are `float`. Use `Math.floor` or `Math.round` to convert to integer
 
-- Use `Math.floor` or `Math.round` to convert to integer
+- There is no typecasting - use `Number()`, `String()`, `.toString()` or implicit conversion
 
-- Strings with `'` or `"` (no interpolation)
-
-- Use `Number()`, `String()`, `.toString()` or even implicitly
+- Use `!` or `!!` to convert to boolean
 
 - Standard operators `+`, `-`, `*`, `/`, `%`, `++`, `--`, `+=`, `-=` etc.
 
-- Operators apply to scalars only (unlike PHP)
-
 - Comparison operators compare reference of objects/arrays not contents
 
-- `typeof a` - `string`, `number`, `function`, `object` or `undefined`
+- `null` is different from `undefined` - prefer `undefined`
+
+- `typeof`: `string`, `number`, `function`, `object` or `undefined`
 
 - `==` vs `===` etc. - the former converts type
 
@@ -431,9 +431,46 @@ template: inverse
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 2. NodeJS
   ### Language
   #### - Basics
+  #### - Strings
+]
+.right-column[
+
+```JavaScript
+let s1 = 'astring';
+let s2 = "another\nstring";
+let s3 = `string in
+multiple lines`;
+```
+
+- Comparison operators compare content (unlike Java)
+
+- Template support using `
+
+```
+let a = 'QuX';
+let b = `bbb${a.toLowerCase()+'y'}eee`; // bbbquxyeee
+```
+
+- `.length` gives the number of characters
+
+- `.startsWith`, `.endsWith`, `.includes` functions
+
+- `.slice` vs `.substr`/`.substring`: use `.slice`
+
+- `.concat` is limiting and *3x* slower than `+`: use `+`
+
+- Spread operator `...` explodes to array of chars
+
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  #### - Basics
+  #### - Strings
   #### - Arrays
 ]
 .right-column[
@@ -442,70 +479,38 @@ template: inverse
 
 - 0 indexed, never associative, trailing comma allowed
 
-- `.length` has the number of elements in array
+- `.length` gives the number of elements
 
 - Access an element with `[]`
 
-- Iteration (more on it later)
+- Iteration: use `for` (fastest) or `for-of` (*2-3x* slower). `forEach` is *7x* slower.
 
 ```JavaScript
 for (let i = 0, il = items.length; i < il; ++i) {
   console.log(items[i]);
 }
-```
-
-- Assignment does *not* copy arrays (unlike PHP), use `arr.slice([begin[, end]])`
-
-- `arr.push(element1, ..., elementN)`, `arr.pop()`
-
-- `arr.unshift([element1[, ...[, elementN]]])`, `arr.shift()`
-
-- `arr.join([separator = ','])` (like PHP `implode`)
-
-- `str.split([separator[, limit]])` (like PHP `explode`)
-
-- `Array.isArray(obj)` to see if a variable is array
-
-]
----
-.left-column[
-  ## The Basics
-  ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Objects
-]
-.right-column[
-
-- `let obj = { prop: 'aval', };`
-
-- Syntax is JSON superset, trailing comma allowed
-
-- Keys can be integers but are converted to strings - don't use
-
-- `Object.keys(obj)` to get property names as array
-
-- Access a property: `obj.propName`, `obj[propInVar]` or `obj['prop-name']`
-
-- Iteration - don't use this
-
-```JavaScript
-for (var prop in obj) {
-  console.log(obj[prop]);
+for (let item of items) {
+  console.log(item);
 }
 ```
 
-- No `class` keyword before ES6
+- Assignment does *not* copy arrays, use `slice`
 
-- Define a class property instead of object: `.prototype`
+- `push`, `pop`, `shift`, `unshift`
+
+- `join` and string `split` (like PHP `implode` and `explode`)
+
+- `obj instanceof Array` to see if a variable is array
+
+- Spread operator `...` to merge arrays `a1.push(...a2)`
+
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 2. NodeJS
   ### Language
   #### - Basics
   #### - Arrays
-  #### - Objects
   #### - Functions
 ]
 .right-column[
@@ -515,43 +520,300 @@ for (var prop in obj) {
 - 2 ways to declare: named version hoisted to top
 
 ```JavaScript
-function a(p) {
+function a(p = 2) {
   return p * p;
 }
-let b = function(p) {
+let b = function(p = 2) {
 	return p * p;
 };
 ```
 
-- Alternate function syntax, AKA, lambda expression or arrow function
+- Alternate syntax, AKA, arrow function or lambda expression (doesn't define its own `this`)
 
 ```JavaScript
-let b = (p) => {
+let b = (p = 2) => {
 	return p * p;
 };
+let c = (p = 2) => (p * p);
+```
+
+- Default parameter value used when parameter is not provided or is `undefined`
+
+```
+let c = b();           // 4
+let d = b(undefined);  // 4
 ```
 ]
 ---
 .left-column[
-  ## The Basics
+  ## 2. NodeJS
   ### Language
   #### - Basics
   #### - Arrays
-  #### - Objects
   #### - Functions
-  #### - Modules
+  #### - Objects
 ]
 .right-column[
 
-- Other languages use classes where NodeJS uses modules
+- `let obj = { prop: 'aval', };`
 
-- `require('foo')` imports what `module.exports` is assigned to
+- Syntax is JSON superset, trailing comma allowed
+
+- Keys are strings (and Symbols)
+
+- `Object.keys(obj)` returns property names (own not inherited)
+
+- Access a property: `obj.propName`, `obj[propInVar]` or `obj['prop-name']`
+
+- Iteration includes inherited properties
+
+```JavaScript
+for (var prop in obj) {
+  if (obj.hasOwnProperty(prop)) {
+    console.log(obj[prop]);
+  }
+}
+```
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  #### - Basics
+  #### - Arrays
+  #### - Functions
+  #### - Objects
+  #### - Maps
+]
+.right-column[
+
+- Like objects, stores key values. Keys can be non-string.
+
+- Uses `get`/`set` syntax (unlike objects). `size` returns number of keys.
+
+```JavaScript
+let map = new Map();
+map.set('a string', 'a val');
+map.get('a string');  // 'a val'
+let key = {};
+map.set(key, 'obj val');
+map.get(key);         // 'obj val'
+map.get({});          // undefined
+map.size;             // 2
+```
+
+```JavaScript
+for (let key of map.keys()) {
+  console.log(key);
+}
+for (let value of map.values()) {
+  console.log(value);
+}
+for (let [key, value] of map.entries()) {
+  console.log(key + " = " + value);
+}
+```
+
+- Faster than objects but many libraries expect objects instead of maps
+
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  #### - Basics
+  #### - Arrays
+  #### - Functions
+  #### - Objects
+  #### - Maps
+  #### - Classes
+]
+.right-column[
+
+```JavaScript
+class Point {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+	static distance(a, b) {
+		return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
+	}
+	getName() {
+		return this.constructor.name;
+	}
+    get area() {
+        return this.x*this.y;
+    }
+}
+class Point3D extends Point {
+	constructor(x, y, z) {
+		super(x, y);
+		this.z = z;
+	}
+}
+let p = new Point(10, 11);
+let cp = new Point3D(1, 2, 3);
+p.getName();
+cp.getName();
+Point3D.distance(p, cp);
+cp.area;
+```
+
+- Use named functions for members, arrow functions cause unexpected behavior
+
+- No private keyword - use closure or WeakMap
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  #### - Basics
+  #### - Arrays
+  #### - Functions
+  #### - Objects
+  #### - Maps
+  #### - Classes
+  #### - Misc
+]
+.right-column[
+
+####Generators
+
+- An alternate way for handling async operations - not convenient to use
+
+####Symbols
+
+- Designed to avoid conflict with a library object keys
+
+- Provide hooks to library objects
+
+####Reflect
+
+```JavaScript
+let yay = Reflect.defineProperty(target, 'foo', { value: 'bar' });
+let deleted = Reflect.deleteProperty(target, 'foo');
+```
+
+####Proxy
+
+- Used to do something whenever the properties of a target object are accessed
+
+]
+---
+template: inverse
+
+# 2. NodeJS
+## Language
+## API
+---
+.left-column[
+  ## 2. NodeJS
+  ### API
+  #### - Overview
+]
+.right-column[
+
+####Globals
+- `__dirname`, `__filename`
+
+- `console` and `process`
+
+####process.env.NODE_ENV
+
+- `process.env` has environment variables
+
+- By convention `NODE_ENV` stores `production` or another run-time environment. If defaults to `development`.
+
+- App behavior can be customized based on this run-time environment. Many libraries automatically change their behavior when it's set to `production`.
+
+- Environment can be set as follows on UNIX/Mac
+```
+NODE_ENV=production npm start
+```
+
+- On Windows
+```
+set NODE_ENV=production && npm start
+```
+
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### API
+  #### - Overview
+  #### - Functionality
+]
+.right-column[
+
+- File system: `fs` and `path`
+
+- `http`/`https`: typically used through a library
+
+- Multicore CPU support: [`cluster`](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
+
+
+- All functionality accessed as modules (see below)
+
+- Async functions have following calling convention
+
+```JavaScript
+somefunc([params, params], callback);
+// E.g.
+const fs = require('fs');
+fs.unlink('/tmp/hello', (err) => {
+  if (err) throw err;
+  console.log('successfully deleted /tmp/hello');
+});
+
+```
+
+- Use Promises instead of callbacks (discussed later): less code, more maintainable
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### API
+  #### - Overview
+  #### - Functionality
+  #### - Module
+]
+.right-column[
+
+- NodeJS defined interface for libraries and components
+
+- Each module is defined in one file: can use other files (also modules)
+
+- Contents of a module files are wrapped in
+
+```JavaScript
+(function (exports, require, module, __filename, __dirname) {
+	// let exports = module.exports = {};
+    // Contents of module file are inserted here
+});
+```
+
+- Exports `module.exports`, an object; `exports` refers to `module.exports`
+
+- To export a single item, assign `module.exports` to it. To export multiple items, add them to `exports` object
+
+- `require('foo')` imports what `foo` exports
 
 - Module name vs path: name is looked up in `node_modules` folder
+]
 
-- Anything can be exported
-
-- In folder `basics`, create `sq.js` and `main.js`
+---
+.left-column[
+  ## 2. NodeJS
+  ### API
+  #### - Overview
+  #### - Functionality
+  #### - Module
+  #### - Create Module
+]
+.right-column[
+- In folder `nodejs`, create `sq.js`
 
 ```JavaScript
 'use strict';
@@ -560,13 +822,15 @@ module.exports = (a) => {
 };
 ```
 
+- Also create `main.js`
+
 ```JavaScript
 'use strict';
 const sq = require('./sq');
 console.log(sq(2));
 ```
 
-- `node main`
+- Run it
 
 ```
 ~/p/n/module $ node main
@@ -576,43 +840,73 @@ console.log(sq(2));
 ---
 template: inverse
 
-# The Quirks
+# 2. NodeJS
+## Language
+## API
+## Libraries
+---
+.left-column[
+  ## 2. NodeJS
+  ### Libraries
+]
+.right-column[
+
+- [`lodash`](https://lodash.com/docs): Extension to basic JavaScript functionality 
+
+- [`async`](http://caolan.github.io/async/): Serial/parallel I/O made easy
+
+- [`bluebird`](http://bluebirdjs.com/docs/api-reference.html): A better promise than that in ES6
+
+- ORM/ODM: [`sequelize`](http://docs.sequelizejs.com/en/latest/), [`mongoose`](http://mongoosejs.com/docs/guide.html) (not recommending MongoDB)
+
+- Logging: [`winston`](https://github.com/winstonjs/winston), [`bunyan`](https://github.com/trentm/node-bunyan)
+
+- Servers: [`express`](http://expressjs.com/en/4x/api.html), [`meteor`](http://docs.meteor.com/#/full/) (not pure JS), [`hapi`](http://hapijs.com/api)
+
+- Testing: [`mocha`](https://mochajs.org/), [`jasmine`](http://jasmine.github.io/2.4/introduction.html)
+
+- Production: [`pm2`](http://pm2.keymetrics.io/)
+
+]
+
 ---
 template: inverse
 
-# The Quirks
-## Single threaded
+# 3. The Quirks
+What may surprise you
 ---
 .left-column[
-  ## The Quirks
+  ## 3. Quirks
   ### Single threaded
 ]
 .right-column[
-- Entire JavaScript code runs in a single thread. Other threads are used for DB/HTTP/file access.
 
-- No deadlock possible - no `synchronize`
+- Like PHP, each request runs in a single thread. But unlike PHP, multiple requests share instantiated classes and data in memory.
 
-- Data is shared among separate requests (unlike PHP)
+- Unlike Java, deadlock not possible - no `synchronize`
 
-- Multicore machines are treated as server clusters: each core runs one JavaScript thread
+- No data is shared between separate threads of the same machine
 
-- No data is shared between separate threads (on different cores) of the same machine
+- Multi-core CPUs are treated as server clusters: each core runs one JavaScript thread. Use `cluster` or `pm2` to fully utilize multi-core CPUs.
 
-- NodeJS [Cluster](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
+- All I/O are executed asynchronously 
+
 ]
 ---
 template: inverse
 
-# Promises, promises
+# 4. Promises, promises
 ---
 template: inverse
 
-# A Microservice
+# 5. A Microservice
 ---
 
 name: last-page
 template: inverse
 
 # The End
+Licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
+
 Slideshow created using [remark](http://github.com/gnab/remark).
 

@@ -1,0 +1,26 @@
+{
+  "name": "learn-node",
+  "version": "0.1.0",
+  "description": "Learn NodeJS by Building a Microservice Using Hapi",
+  "scripts": {
+    "start": "http-server slides"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinkaga/learn-node.git"
+  },
+  "keywords": [
+    "ECMAScript 2015",
+    "ECMAScript 6",
+    "ES6",
+    "NodeJS",
+    "NodeJS 6.x",
+    "JavaScript"
+  ],
+  "author": "Vinay Agarwal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vinkaga/learn-node/issues"
+  },
+  "homepage": "https://github.com/vinkaga/learn-node#readme"
+}
