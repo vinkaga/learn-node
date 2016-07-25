@@ -877,7 +877,7 @@ What may surprise you
 ---
 .left-column[
   ## 3. Quirks
-  ### Single threaded
+  #### Single threaded
 ]
 .right-column[
 
@@ -889,8 +889,225 @@ What may surprise you
 
 - Multi-core CPUs are treated as server clusters: each core runs one JavaScript thread. Use `cluster` or `pm2` to fully utilize multi-core CPUs.
 
-- All I/O are executed asynchronously 
+- All I/O are executed asynchronously.
 
+```JavaScript
+const fs = require('fs');
+let txt = 'nothing';
+fs.readFile('hello.txt', function(data) {
+	txt = data; 	// data = 'hello'
+});
+console.log(txt);   // nothing
+```
+
+- There isn't any sleep like function, use `setTimeout`
+
+```JavaScript
+setTimeout(callback, delay);
+```
+
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+]
+.right-column[
+
+- Objects: `Object`, `Array`, `Function`, `Map`, `Symbol`, `Date`, `Error`, `RegExp`, `Math`, `Reflect` ...
+
+- Primitives: `Number`, `String`, `Boolean`, `undefined`. (Use `undefined` where you would use `null` in other languages.)
+
+- Primitives can be used like objects
+
+```JavaScript
+3.14.toString();              // '3.14'
+'     somestring   '.trim();  // 'somestring'
+```
+
+- Check types of primitives: `typeof`
+
+```JavaScript
+typeof 2;         // 'number'
+typeof '';        // 'string'
+typeof true;      // 'boolean'
+typeof undefined; // 'undefined'
+
+```
+
+- Check type of objects: `instanceof`
+
+```JavaScript
+[] instanceof Array;                // true
+(function(){}) instanceof Function; // true
+(()=>{}) instanceof Function;       // true
+(new Map()) instanceof Map;         // true
+
+```
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+]
+.right-column[
+
+- Object methods using `this` 
+
+```JavaScript
+class Person {
+	constructor(first, last) {
+		this.first = first;
+		this.last = last;
+	}
+	showName() {
+		console.log(this.first + " " + this.last);
+	}
+}
+let person = new Person('Brad', 'Pitt');
+person.showName();                            // 'Brad Pitt'
+setTimeout(person.showName, 10);              // 'undefined undefined'
+setTimeout(person.showName.bind(person), 10); // 'Brad Pitt'
+```
+]
+
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+]
+.right-column[
+
+- `this` in inner function
+
+```JavaScript
+class Golf {
+	constructor() {
+		this.tournament = 'Masters';
+		this.data = ['Woods', 'Mickelson'];
+	}
+	showPlayers() {
+		this.data.forEach(function(player) {
+			console.log(player + ' in ' + this.tournament);
+		});
+	}
+	showPlayers2() {
+		this.data.forEach((player) => {
+			console.log(player + ' in ' + this.tournament);
+		});
+	}
+}
+let golf = new Golf();
+golf.showPlayers();   // TypeError: Cannot read property 'tournament' of undefined
+golf.showPlayers2();  // OK
+```
+
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+  #### Sequential I/O
+]
+.right-column[
+
+- Sequential I/Os are surprisingly tedious. An account creation may have 3 steps
+ 1. Create user in DB
+ 2. Create email in DB
+ 3. Send verification email
+
+```JavaScript
+db.user.create(userin, function(err, userout) {
+	db.email.create(emailin,  function(err, emailout) {
+		mailutil.send(payload, function(err) {
+			console.log('Account creation ' + (err ? 'error' : 'success'));
+		});
+	});
+});
+
+```
+
+- Requirements change and another step between 2 & 3 is needed - take credit card. Using [`async`](http://caolan.github.io/async/)
+
+```JavaScript
+async.series([
+	function(cb) {db.user.create(userin, cb)},
+	function(cb) {db.email.create(emailin, cb)},
+	function(cb) {mailutil.send(payload, cb)},
+], function(err) {
+	console.log('Account creation ' + (err ? 'error' : 'success'));
+});
+```
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+  #### Sequential I/O
+  #### Closures
+]
+.right-column[
+
+- Closures keep access to outer scopes where they were defined (unlike object functions)
+
+```JavaScript
+function counter(start) {
+    let count = start;
+    return {
+        increment: function() {
+            count++;
+        },
+
+        get: function() {
+            return count;
+        }
+    }
+}
+var foo = counter(4);
+foo.increment();
+foo.get();            // 5
+```
+
+- `increment` and `get` have access to `count`!
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+  #### Sequential I/O
+  #### Closures
+]
+.right-column[
+
+- Don't use `var` for closures inside loops
+
+```JavaScript
+// This doesn't work as intended
+for (var i = 0; i < 5; i++) {
+	setTimeout(function() {
+		console.log(i);
+	}, 1);
+}
+// This one does
+for (let i = 0; i < 5; i++) {
+	setTimeout(function() {
+		console.log(i);
+	}, 1);
+}
+```
+
+- More details at [MDN let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
 ]
 ---
 template: inverse
