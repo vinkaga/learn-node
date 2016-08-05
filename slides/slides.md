@@ -777,6 +777,35 @@ fs.unlink('/tmp/hello', (err) => {
   ### API
   #### - Overview
   #### - Functionality
+  #### - Events
+]
+.right-column[
+
+- NodeJS [Events](https://nodejs.org/api/events.html) let apps create and consume custom events
+
+```JavaScript
+const Event = require('events');
+class MyEvent extends Event {}
+
+const myEvent = new MyEvent();
+
+// Listen for an event
+myEvent.on('crzy', function(name) {
+	console.log('Occurred:', name);
+});
+
+// Send out an event
+myEvent.emit('crzy', 'crazy event');
+```
+]
+
+---
+.left-column[
+  ## 2. NodeJS
+  ### API
+  #### - Overview
+  #### - Functionality
+  #### - Events
   #### - Module
 ]
 .right-column[
@@ -809,6 +838,7 @@ fs.unlink('/tmp/hello', (err) => {
   ### API
   #### - Overview
   #### - Functionality
+  #### - Events
   #### - Module
   #### - Create Module
 ]
@@ -1053,6 +1083,50 @@ async.series([
   #### Objects v. Primitives
   #### `this`
   #### Sequential I/O
+  #### Exceptions
+]
+.right-column[
+
+- Exception 'err_one' is caught as expected
+
+```JavaScript
+function one() {
+	throw new Error('err_one');
+	return 'one';
+}
+try {
+	one();
+} catch (e) {
+	console.log('Caught: ' + e.message);
+}
+```
+
+- Exception 'err_two' is *not* caught
+
+```JavaScript
+function two() {
+	setTimeout(function() {
+		throw new Error('err_two');
+	}, 10);
+	return 'two';
+}
+try {
+	two();
+} catch (e) {
+	console.log('Caught: ' + e.message);
+}
+```
+
+- Don't throw exceptions in async or mixed code - use [Events](https://nodejs.org/api/events.html) or `Promise.reject`
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Single threaded
+  #### Objects v. Primitives
+  #### `this`
+  #### Sequential I/O
+  #### Exceptions
   #### Closures
 ]
 .right-column[
@@ -1086,6 +1160,7 @@ foo.get();            // 5
   #### Objects v. Primitives
   #### `this`
   #### Sequential I/O
+  #### Exceptions
   #### Closures
 ]
 .right-column[
@@ -1113,6 +1188,202 @@ for (let i = 0; i < 5; i++) {
 template: inverse
 
 # 4. Promises, promises
+---
+.left-column[
+  ## 4. Promises
+  #### What?
+]
+.right-column[
+
+- Async operation reality
+
+```JavaScript
+let user;
+db.user.read(id, function(err, data) {
+	user = data;
+});
+console.log(data);   // undefined
+```
+
+- Convenient for programming
+
+```JavaScript
+let user = db.user.read(id);
+console.log(user);   // user from DB
+```
+
+- Requires implicit wait after the `db.user.read`
+
+- What if `db.user.read` returned a 'container' that will automatically get the result when it becomes available
+
+- This container can be passed just like result
+
+- Reading the result (from the container) requires 'unwrap' operation (with implicit wait)
+
+- Such a container is called a promise (a Future in Java)
+
+- Standard promise spec [Promises/A+](https://promisesaplus.com/)
+
+]
+---
+.left-column[
+  ## 4. Promises
+  #### What?
+  #### Properties
+]
+.right-column[
+
+- `then` is the unwrap function (has implicit wait)
+
+```JavaScript
+let promise = db.user.read(id);
+promise.then(function(data) {
+	// data is result of the promise
+}, function(err) {
+	// err is the error occurred in operation
+});
+```
+
+- Promises are stateful and have 3 states
+
+1. Pending
+2. Resolved (successful)
+3. Rejected (error occurred)
+
+- Once resolved/rejected, a promise cannot change state
+
+- To create a promise
+
+```JavaScript
+let promise = new Promise(function(resolve, reject) {
+	// resolve and reject are function
+	if (...) {
+		resolve(somevalue);
+		return;
+	}
+	...
+	reject(someerror);
+});
+```
+]
+---
+.left-column[
+  ## 4. Promises
+  #### What?
+  #### Properties
+  #### Usage
+]
+.right-column[
+
+- Alternative syntax
+
+```JavaScript
+Promise.resolve(val);     // Creates a promise with success value = val
+Promise.reject(err);      // Creates a promise with rejection error = err
+promise.then(sucessfunc); // Unwrap shortcut promise.then(successfunc, undefined);
+promise.catch(errfunc);   // Unwrap shortcut promise.then(undefined, errfunc):
+```
+
+- Promises are chainable
+
+```JavaScript
+db.user.create(userin)
+.then(db.email.create(emailin))
+.then(mailutil.send(payload))
+.catch(errfunc); // Handles errors from all previous steps
+```
+
+- A promise is passed up the chain till the next suitable handler is found
+
+- Promises can be unwrapped, modified and put back in the chain
+
+```JavaScript
+db.user.create(userin)
+.then(function(user) {
+	return (user.id % 2) ? Promise.reject('odd user') : Promise.resolve(user);
+})
+.then(db.email.create(emailin))
+.then(mailutil.send(payload))
+.catch(...);
+```
+
+]
+---
+.left-column[
+  ## 4. Promises
+  #### What?
+  #### Properties
+  #### Usage
+]
+.right-column[
+
+- Sequential operations
+
+```JavaScript
+db.user.create(userin)
+.then(db.email.create(emailin))
+.then(mailutil.send(payload))
+.catch(errfunc); // Handles errors from all previous steps
+```
+
+- Parallel operations
+
+```JavaScript
+Promise.all([
+	db.user.create(userin),
+	db.group.create(groupin),
+	remoteResource.get(resourceId),
+]).then(...)
+.catch(...);
+```
+
+- Best practice: Make all async interfaces promises
+
+]
+---
+.left-column[
+  ## 4. Promises
+  #### What?
+  #### Properties
+  #### Usage
+  #### Overhead
+]
+.right-column[
+
+- Promises have overhead - some better than others. [Bluebird benchmark](https://github.com/petkaantonov/bluebird/tree/master/benchmark)
+
+```
+file                                   time(ms)  memory(MB)
+                     Sequential
+callbacks-baseline.js                      232       35.86
+promises-bluebird-generator.js             235       38.04
+promises-bluebird.js                       335       52.08
+promises-cujojs-when.js                    405       75.77
+promises-tildeio-rsvp.js                   468       87.56
+promises-dfilatov-vow.js                   578      125.98
+callbacks-caolan-async-waterfall.js        634       88.64
+promises-lvivski-davy.js                   653      109.64
+promises-ecmascript6-native.js            1348      189.29
+promises-then-promise.js                  1571      294.45
+promises-medikoo-deferred.js              2091      262.18
+observables-Reactive-Extensions-RxJS.js   3201      356.76
+promises-kriskowal-q.js                   9952      694.23
+
+                     Parallel
+callbacks-baseline.js                      211       25.57
+promises-bluebird.js                       389       53.49
+promises-bluebird-generator.js             491       55.52
+promises-tildeio-rsvp.js                   785      108.14
+promises-dfilatov-vow.js                   798      102.08
+promises-cujojs-when.js                    851       60.46
+promises-lvivski-davy.js                  1298      135.43
+callbacks-caolan-async-parallel.js        1780      101.11
+promises-then-promise.js                  2438      338.91
+promises-ecmascript6-native.js            3532      301.96
+promises-medikoo-deferred.js              4207      357.60
+```
+
+]
 ---
 template: inverse
 
