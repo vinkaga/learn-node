@@ -203,7 +203,7 @@ name: how
 ]
 .right-column[
 ####package.json
-- `npm init` and accept all default responses
+- `npm init`
 
 - `npm install --save hapi`
 
@@ -217,7 +217,7 @@ name: how
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "hapi": "^13.4.1"
   }
@@ -350,17 +350,19 @@ server.start(function(err) {
 
 ```JavaScript
 'use strict';
+const server = require('../src/server.js');
 const Code = require('code');
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
-const server = require('./server.js');
+const describe = lab.describe;
+const it = lab.it;
+const expect = Code.expect;
 
-lab.experiment("Basic HTTP Tests", function() {
-	lab.test('It will return simple server JSON', function(done) {
-		server.inject('/', function(res) {
-			Code.expect(res.statusCode).to.equal(200);
-			Code.expect(res.payload).to.equal('{"simple":"server"}');
-			done();
+describe("Basic HTTP Tests", function() {
+	it('should return simple server JSON', function() {
+		return server.inject('/').then(function(res) {
+			expect(res.statusCode).to.equal(200);
+			expect(res.payload).to.equal('{"simple":"server"}');
 		});
 	});
 });
@@ -674,6 +676,45 @@ cp.area;
   #### - Objects
   #### - Maps
   #### - Classes
+  #### - Namespace
+]
+.right-column[
+
+- No namespaces - extra steps needed to avoid name-collision.
+
+- Blocks limit `let` declarations but not `var` or `function`
+
+```JavaScript
+{
+  function hello() { console.log('hello'); }        // Global
+  var hola = function() { console.log('hola'); };   // Global
+  let world = function() { console.log('world'); }; // Local
+}
+```
+
+- Legacy code uses Immediately-Invoked Function Expressions to limit scope
+
+```JavaScript
+(function(){
+  function hello() { console.log('hello'); }        // Local
+  var hola = function() { console.log('hola'); };   // Local
+}());
+```
+
+- All declarations in NodeJS modules are forced local
+
+]
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  #### - Basics
+  #### - Arrays
+  #### - Functions
+  #### - Objects
+  #### - Maps
+  #### - Classes
+  #### - Namespace
   #### - Misc
 ]
 .right-column[
@@ -820,8 +861,11 @@ myEvent.emit('crzy', 'crazy event');
 (function (exports, require, module, __filename, __dirname) {
 	// let exports = module.exports = {};
     // Contents of module file are inserted here
+    // Declarations are local
 });
 ```
+
+- All declarations are local to module
 
 - Exports `module.exports`, an object; `exports` refers to `module.exports`
 
@@ -1337,6 +1381,18 @@ Promise.all([
 .catch(...);
 ```
 
+- No rejection handler: Unhandled rejection error
+
+```JavaScript
+const Promise = require('bluebird');
+function some() {
+	return Promise.reject('some error');
+}
+some().then(function(res) {
+	console.log(res); // Unhandled rejection some error
+});
+```
+
 - Best practice: Make all async interfaces promises
 
 ]
@@ -1388,6 +1444,318 @@ promises-medikoo-deferred.js              4207      357.60
 template: inverse
 
 # 5. A Microservice
+Code, Document, Test, Code-coverage
+---
+.left-column[
+  ## 5. Microservice
+  #### Goals
+]
+.right-column[
+
+- Create a REST microservice using realistic components
+
+- Store data in a DB (MySQL)
+
+- Consume a third party REST service in the microservice
+
+- Validate inputs and outputs against schema
+
+- Generate documentation automatically
+
+- Create appropriate tests
+
+- Measure code coverage
+
+- Test business critical business areas extensively
+
+]
+---
+.left-column[
+  ## 5. Microservice
+  #### Goals
+  #### TO Do Service
+]
+.right-column[
+
+- REST service to store to-do list. 
+
+- To-do items are posted in English. Server uses a translation service [Yandex](https://translate.yandex.com/developers) to convert items to Spanish.
+
+- No users, accounts or authentication
+
+- Uses Hapi framework
+
+- DB storage through [Sequelize ORM](http://docs.sequelizejs.com/en/latest/)
+
+- REST client [Request](https://github.com/request/request)
+
+- REST client promise interface [Request-Promise](https://github.com/request/request-promise)
+
+- Promise [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
+
+- Logging with [Bunyan](https://github.com/trentm/node-bunyan)
+
+- Utility library [lodash]()
+
+- Automatically generated documentation
+
+- Create appropriate tests
+
+- Measure code coverage
+
+- Testing critical areas
+
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+]
+.right-column[
+
+- `npm init` and create other folders as follows
+
+```
+src
+  model
+  controller
+  util
+  schema
+test
+  model
+  controller
+  util
+  schema
+docs
+package.json
+```
+
+- `npm install --save hapi sequelize mysql request-promise bluebird bunyan lodash`
+
+- `npm install --save-dev lab code`
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+]
+.right-column[
+
+- Server global config, depends on run environment
+
+- `config.js` in project root
+
+```JavaScript
+const env = process.env.NODE_ENV || 'development';
+const configs = {
+	development: {
+		port: 3000,
+		db: {
+			name: 'todo-dev',
+			username: 'root',
+			password: 'mysql',
+			dialect: 'mysql',
+			host: 'localhost',
+			port: 3306
+		},
+		logger: {
+			name: 'todo-dev',
+			level: 'info',
+			stream: process.stdout,
+		},
+	},
+	...
+};
+let config = configs[env];
+config.env = env;
+module.exports = config;
+```
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+  #### Model
+]
+.right-column[
+
+- A single DB table `item`
+ 
+- Two columns `desc` and `trans` 256 char max, not empty
+
+- In folder `src/model`, create `item.js`
+
+```JavaScript
+module.exports = function(sequelize, DataTypes) {
+	return sequelize.define('item', {
+		desc: {
+			type: DataTypes.STRING(256),
+			validate: {
+				len: [1, 256],
+			},
+		},
+		trans: {
+			type: DataTypes.STRING(256),
+			validate: {
+				len: [1, 256],
+			},
+		},
+	});
+};
+```
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+  #### Model
+]
+.right-column[
+
+- Database public interface 
+
+- In folder `src/model`, create `index.js`
+
+```JavaScript
+const config = require('../../config');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {
+	dialect: config.db.dialect,
+	host: config.db.host,
+	port: config.db.port,
+	logging: false,
+});
+
+const models = {
+	Sequelize: Sequelize,
+	sequelize: sequelize,
+};
+module.exports = models;
+
+const names = [
+	'item',
+];
+
+for (let name of names) {
+	models[name] = sequelize.import(__dirname + '/' + name)
+}
+```
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+  #### Model
+  #### Model Test
+]
+.right-column[
+
+- No server needed to test the models
+
+- Validate our model definition and dependencies
+
+- In folder `test/model`, create `item.js`
+
+```JavaScript
+process.env.NODE_ENV = 'test';
+const db = require('../../src/model/index');
+const Promise = require('bluebird');
+const Code = require('code');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const it = lab.it;
+const before = lab.before;
+const expect = Code.expect;
+const fail = Code.fail;
+
+const rec = { desc: 'a todo item', trans: 'translated item' };
+
+describe("Models: Item", () => {
+
+	before(() => {
+		return db.sequelize.sync({force: true}); // Clean DB
+	});
+
+    // Tests go here
+});
+```
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+  #### Model
+  #### Model Test
+]
+.right-column[
+
+- Tests for success and error cases
+
+- Typically, there are many error cases for each success case
+
+- No equivalent to PHPUnit `dataProvider` - use promise or `async` to test with multiple conditions
+
+```JavaScript
+	it('should create OK', () => {
+		return db.item.create(rec).then(() => {
+			db.item.find({where: {desc: rec.desc}}).then((item) => {
+				expect(item.desc).to.equal(rec.desc);
+			});
+		});
+	});
+
+	it('should fail creating', () => {
+		return Promise.all([
+			db.item.create({desc: rec.desc}).then(() 			=> { fail('created with missing trans') }).catch((e) => {}),
+			db.item.create({desc: rec.desc, trans: ''}).then(() => { fail('created with empty desc') }).catch((e) => {}),
+			db.item.create({trans: rec.trans}).then(() 			=> { fail('created with missing desc') }).catch((e) => {}),
+			db.item.create({desc: '', trans: rec.trans}).then(()=> { fail('created with empty desc') }).catch((e) => {}),
+		]);
+	});
+```
+]
+---
+.left-column[
+  ## 5. Microservice
+  ### TO Do Service
+  #### Config
+  #### Model
+  #### Model Test
+  #### Controller
+]
+.right-column[
+
+- Tests for success and error cases
+
+- Typically, there are many error cases for each success case
+
+- No equivalent to PHPUnit `dataProvider` - use promise or `async` to test with multiple conditions
+
+```JavaScript
+	it('should create OK', () => {
+		return db.item.create(rec).then(() => {
+			db.item.find({where: {desc: rec.desc}}).then((item) => {
+				expect(item.desc).to.equal(rec.desc);
+			});
+		});
+	});
+
+	it('should fail creating', () => {
+		return Promise.all([
+			db.item.create({desc: rec.desc}).then(() 			=> { fail('created with missing trans') }).catch((e) => {}),
+			db.item.create({desc: rec.desc, trans: ''}).then(() => { fail('created with empty desc') }).catch((e) => {}),
+			db.item.create({trans: rec.trans}).then(() 			=> { fail('created with missing desc') }).catch((e) => {}),
+			db.item.create({desc: '', trans: rec.trans}).then(()=> { fail('created with empty desc') }).catch((e) => {}),
+		]);
+	});
+```
+]
 ---
 
 name: last-page
