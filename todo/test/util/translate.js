@@ -14,7 +14,7 @@ const it = lab.it;
 const expect = Code.expect;
 const fail = Code.fail;
 
-describe("Models: Item", () => {
+describe("Util: Translate", () => {
 
 	it('should translate', () => {
 		return translate('hello').then((str) => {

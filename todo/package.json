@@ -4,7 +4,11 @@
   "description": "Example To-do Service",
   "main": "src/server.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node src/server | bunyan",
+    "startProd": "env NODE_ENV=production node src/server | bunyan",
+    "test": "lab -v -m 10000 test",
+    "coverage": "lab -c -t 80 -r html -o coverage.html --coverage-path ./src",
+    "update": "ncu -u"
   },
   "repository": {
     "type": "git",
@@ -14,10 +18,13 @@
     "bluebird": "3.4.1",
     "bunyan": "1.8.1",
     "hapi": "14.1.0",
+    "hapi-swagger": "6.2.2",
+    "inert": "4.0.1",
     "mysql": "2.11.1",
     "request": "2.74.0",
     "request-promise": "4.1.1",
-    "sequelize": "3.23.6"
+    "sequelize": "3.23.6",
+    "vision": "4.1.0"
   },
   "devDependencies": {
     "code": "3.0.2",

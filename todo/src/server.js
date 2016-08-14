@@ -21,7 +21,7 @@ db.sequelize.sync()
 		return server.start();
 	})
 	.then(function() {
-		logger.warn('Server Restart: ' + server.info.uri);
+		logger.warn('Server Restart: ' + server.info.uri + ' Env: ' + config.env);
 	})
 	.catch((err) => {
 		logger.fatal(err);

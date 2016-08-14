@@ -79,6 +79,24 @@ describe("Controllers: Item", () => {
 				method: 'DELETE',
 				url: '/100',
 			}).then((r) => { if (r.statusCode != 400) fail('DELETE /100 should have failed'); }),
+			server.inject({
+				method: 'POST',
+				url: '/',
+				payload: '""',
+			}).then((r) => { if (r.statusCode != 400) fail('POST "" should have failed'); }),
+			server.inject({
+				method: 'POST',
+				url: '/',
+				payload: '"hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello"',
+			}).then((r) => { if (r.statusCode != 400) fail('POST very long string should have failed'); }),
+			server.inject({
+				method: 'DELETE',
+				url: '/-1',
+			}).then((r) => {if (r.statusCode != 400) fail('DELETE /-1 should have failed'); }),
+			server.inject({
+				method: 'DELETE',
+				url: '/1.2',
+			}).then((r) => {if (r.statusCode != 400) fail('DELETE /1.2 should have failed'); }),
 		]);
 	});
 

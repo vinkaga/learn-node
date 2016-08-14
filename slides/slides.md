@@ -1475,6 +1475,8 @@ A trivial service built with rigor and best practices
 .center-column[
 - Overview
 - Components
+- Validation
+- Scripts
 - Documentation
 - Coverage
 - Testing Critical Areas
@@ -1560,28 +1562,31 @@ test
   model
   controller
   util
-  schema
-docs
+documentation
 package.json
 ```
 
-- `npm install --save hapi sequelize mysql request-promise bluebird bunyan`
+- `npm install --save hapi sequelize mysql request-promise bluebird bunyan hapi-swagger inert vision`
 
 - `npm install --save-dev lab code`
 
-- `npm install -g lab`
+- `sudo npm install -g bunyan lab npm-check-updates`
+
+- Use exact version of dependencies: remove `^`
+
 ]
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
 ]
 .right-column[
 
-- Server global config, depends on run environment
+- Components reference code `./todo` GIT tag `prevalidation`
 
-- Create `config.js` in project root
+- Server global config `config.js` in project root, depends on run environment
 
 ```JavaScript
 const env = process.env.NODE_ENV || 'development';
@@ -1617,6 +1622,7 @@ config.env = env;
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1641,6 +1647,7 @@ module.exports = bunyan.createLogger(config.logger);
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1678,6 +1685,7 @@ module.exports = (sequelize, DataTypes) => {
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1718,6 +1726,7 @@ for (const model of models) {
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1760,6 +1769,7 @@ describe("Models: Item", () => {
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1802,6 +1812,7 @@ lab -v test/model/item.js
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1849,6 +1860,7 @@ module.exports = (input) => {
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1899,6 +1911,7 @@ lab -v test/util/translate.js
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1945,6 +1958,7 @@ module.exports = [get, post, del];
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -1996,6 +2010,7 @@ const del = {
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -2028,6 +2043,7 @@ const config = require('../../config');
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
   ### Components
   #### Config
   #### Logger
@@ -2063,7 +2079,7 @@ db.sequelize.sync()
 		return server.start();
 	})
 	.then(function() {
-		logger.warn('Server Restart: ' + server.info.uri);
+		logger.warn('Server Restart: ' + server.info.uri + ' Env: ' + config.env);
 	})
 	.catch((err) => {
 		logger.fatal(err);
@@ -2104,7 +2120,7 @@ db.sequelize.sync()
   "devDependencies": {
     "code": "3.0.2",
     "lab": "10.9.0"
-  }
+}
 }
 ```
 ]

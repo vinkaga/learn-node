@@ -20,6 +20,10 @@ const configs = {
 			key: 'trnsl.1.1.20160805T143434Z.8ad64dde3d4eea98.6632d4e5d70a8856294dca911558615dd5ce1c4c',
 			lang: 'es',
 		},
+		response: {
+			sample: 100,
+			failAction: 'error',
+		},
 		logger: {
 			name: 'todo-dev',
 			level: 'info',
@@ -41,6 +45,10 @@ const configs = {
 			key: 'trnsl.1.1.20160805T143434Z.8ad64dde3d4eea98.6632d4e5d70a8856294dca911558615dd5ce1c4c',
 			lang: 'es',
 		},
+		response: {
+			sample: 100,
+			failAction: 'error',
+		},
 		logger: {
 			name: 'todo-test',
 			level: 61,
@@ -48,7 +56,7 @@ const configs = {
 		},
 	},
 	production: {
-		port: 80,
+		port: 1080,
 		db: {
 			name: 'todo',
 			username: 'root',
@@ -62,9 +70,15 @@ const configs = {
 			key: 'trnsl.1.1.20160805T143434Z.8ad64dde3d4eea98.6632d4e5d70a8856294dca911558615dd5ce1c4c',
 			lang: 'es',
 		},
+		response: {
+			sample: 10,
+			failAction: 'log',
+		},
 		logger: {
 			name: 'todo',
 			streams: [{
+				stream: process.stdout,
+			}, {
 				level: 'warn',
 				type: 'rotating-file',
 				path: 'todo.log',
