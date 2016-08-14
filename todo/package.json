@@ -7,7 +7,7 @@
     "start": "node src/server | bunyan",
     "startProd": "env NODE_ENV=production node src/server | bunyan",
     "test": "lab -v -m 10000 test",
-    "coverage": "lab -c -t 80 -r html -o coverage.html --coverage-path ./src",
+    "coverage": "lab -c -t 80 -r html -o coverage.html --coverage-path ./src -v -m 10000 test",
     "update": "ncu -u"
   },
   "repository": {

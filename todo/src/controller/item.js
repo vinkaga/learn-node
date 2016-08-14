@@ -22,6 +22,8 @@ const get = {
 					return reply(Boom.badImplementation(err));
 				});
 		},
+		description: 'Get To-do items',
+		tags: ['api'],
 		validate: schema.GET.validate,
 		response: schema.GET.response,
 	},
@@ -46,6 +48,8 @@ const post = {
 					return reply(Boom.badImplementation(err));
 				});
 		},
+		description: 'Create a To-do item',
+		tags: ['api'],
 		validate: schema.POST.validate,
 		response: schema.POST.response,
 	},
@@ -67,6 +71,8 @@ const del = {
 					return reply(Boom.badImplementation(err));
 				});
 		},
+		description: 'Delete a To-do item',
+		tags: ['api'],
 		validate: schema.DELETE.validate,
 		response: schema.DELETE.response,
 	},

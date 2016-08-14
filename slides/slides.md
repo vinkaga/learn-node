@@ -17,7 +17,7 @@ Licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 ---
 layout: false
 .left-column[
-  ### About
+  ## About
 ]
 .right-column[
 
@@ -41,7 +41,7 @@ layout: false
 ---
 layout: false
 .left-column[
-  ### Outline
+  ## Outline
 ]
 .right-column[
 
@@ -1479,7 +1479,6 @@ A trivial service built with rigor and best practices
 - Scripts
 - Documentation
 - Coverage
-- Testing Critical Areas
 ]
 ---
 .left-column[
@@ -2089,40 +2088,305 @@ db.sequelize.sync()
 ---
 .left-column[
   ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  #### Input
+]
+.right-column[
+
+- Strategy: validate all inputs
+
+- Item schema module exports validation schema for all methods requiring validation
+
+- Create `item.js` in `src/schema` (GIT tag `validate`)
+
+```JavaScript
+const Joi = require('joi');
+module.exports.POST = {
+	validate: { payload: Joi.string().min(1).max(256) },
+};
+module.exports.DELETE = {
+	validate: {
+		params: { id: Joi.number().integer().min(1), }
+	},
+};
+```
+
+- Modify `src/controller/item.js` to add validations. Pull `handler` inside `config` object 
+
+```JavaScript
+const schema = require('../schema/item');
+	config: {
+		handler: ...,
+		validate: schema.POST.validate,
+	},
+```
+
+- Delete unneeded check in `src/controller/item.js`
+
+```JavaScript
+		if (!request.payload) {
+			return reply(Boom.badRequest('Item is required'));
+		}
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  #### Input
+]
+.right-column[
+
+- Add additional validation (failure) tests to `test/controller/item.js` 
+
+```JavaScript
+	it('should fail', () => {
+		return Promise.all([
+			...,
+			server.inject({
+				method: 'POST',
+				url: '/',
+				payload: '""',
+			}).then((r) => { if (r.statusCode != 400) fail('POST "" should have failed'); }),
+			server.inject({
+				method: 'POST',
+				url: '/',
+				payload: '"hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello"',
+			}).then((r) => { if (r.statusCode != 400) fail('POST very long string should have failed'); }),
+			server.inject({
+				method: 'DELETE',
+				url: '/-1',
+			}).then((r) => {if (r.statusCode != 400) fail('DELETE /-1 should have failed'); }),
+			server.inject({
+				method: 'DELETE',
+				url: '/1.2',
+			}).then((r) => {if (r.statusCode != 400) fail('DELETE /1.2 should have failed'); }),
+		]);
+	});
+```
+
+- Run controller tests 
+
+```
+lab -v -m 10000 test/controller/item.js
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  #### Input
+  #### Output
+]
+.right-column[
+
+#### Strategy
+- Production: validate 10% responses, log but *do not* send error
+
+- Development/Test: validate 100% responses, send error
+
+- Update `config.js` 
+
+```JavaScript
+		response: {
+			sample: 100,
+			failAction: 'error',
+		},
+		...
+		response: {
+			sample: 10,
+			failAction: 'log',
+		},
+```
+- Update `src/schema/item.js` 
+
+```JavaScript
+module.exports.GET = {
+	response: Object.assign({
+		schema: Joi.array().items(Joi.object({
+			id: Joi.number().integer().required(),
+			desc: Joi.string().required(),
+			trans: Joi.string().required(),
+			createdAt: Joi.date().required(),
+			updatedAt: Joi.date().required(),
+		})),
+	}, config.response),
+};
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  #### Input
+  #### Output
+]
+.right-column[
+
+- Modify `src/controller/item.js` to add response validation
+
+```JavaScript
+	config: {
+		handler: ...,
+		validate: ...,
+		response: schema.GET.response,
+	},
+```
+
+- Rerun controller tests
+
+```
+lab -v -m 10000 test/controller/item.js
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
   ### Scripts
 ]
 .right-column[
 
-- Edit `package.json` to add the following scripts
+- Provides known ways to perform typical tasks
+
+- Make `scripts` content of `package.json` as follows
 
 ```JSON
 {
-  "name": "todo",
-  "version": "1.0.0",
-  "description": "Example To-do Service",
-  "main": "src/server.js",
+  ...
   "scripts": {
-    "test": "npm test"
+    "start": "node src/server | bunyan",
+    "startProd": "env NODE_ENV=production node src/server | bunyan",
+    "test": "lab -v -m 10000 test",
+    "coverage": "lab -c -t 80 -r html -o coverage.html --coverage-path ./src -v -m 10000 test",
+    "update": "ncu -u"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vinkaga/learn-node/tree/master/todo"
-  },
-  "dependencies": {
-    "bluebird": "3.4.1",
-    "bunyan": "1.8.1",
-    "hapi": "14.1.0",
-    "mysql": "2.11.1",
-    "request": "2.74.0",
-    "request-promise": "4.1.1",
-    "sequelize": "3.23.6"
-  },
-  "devDependencies": {
-    "code": "3.0.2",
-    "lab": "10.9.0"
-}
+  ...
 }
 ```
+
+- All scripts can be run by `npm run <name>`
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  ### Scripts
+  ### Documentation
+]
+.right-column[
+
+- Automatically generate documentation from code
+
+- Modify `src/server.js` as follows
+
+```JavaScript
+const config = require('../config');
+const db = require('./model/index');
+const logger = require('./util/logger');
+const routes = require('./controller/index');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
+const Package = require('../package');
+
+const server = module.exports = new Hapi.Server();
+server.connection({ port: config.port });
+
+server.register([ Inert, Vision,
+	{
+		'register': HapiSwagger,
+		'options': {
+			info: { 'title': Package.description, 'version': Package.version, }
+		}
+	}
+]) .then(() => {
+		server.route(routes);
+		return db.sequelize.sync();
+	})
+	.then(() => { return server.start(); })
+	.then(() => { logger.warn('Server Restart: ' + server.info.uri + ' Env: ' + config.env); })
+	.catch((err) => { logger.fatal(err); });
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  ### Scripts
+  ### Documentation
+]
+.right-column[
+
+- Modify `src/controller/item.js` as follows
+
+```JavaScript
+...
+		description: 'Get To-do items',
+		tags: ['api'],
+...
+		description: 'Create a To-do item',
+		tags: ['api'],
+...
+		description: 'Delete a To-do item',
+		tags: ['api'],
+...
+```
+
+- `npm start` and browse at `localhost:3000/documentation`
+
+<img src="doc.png" width="66%">
+
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Overview
+  ### Components
+  ### Validation
+  ### Scripts
+  ### Documentation
+  ### Coverage
+]
+.right-column[
+
+- `npm run coverage` and browse `coverage.html`
+
+<img src="todocov.png" width="100%">
+
+]
+---
+.left-column[
+  ## Epilogue
+]
+.right-column[
+
+#### Production
+- `npm run startProd` is just a demo script
+
+- In actual production, use [`pm2`](http://pm2.keymetrics.io/) or [`cluster`](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
+
+#### Updating dependencies
+- `npm run update` updates `package.json`
+
+- `npm install` to install updates
+
+- `npm test` to validate updated dependencies
 ]
 ---
 
