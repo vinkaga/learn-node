@@ -43,7 +43,7 @@ const configs = {
 		},
 		logger: {
 			name: 'todo-test',
-			level: 'error',
+			level: 61,
 			stream: process.stdout,
 		},
 	},
@@ -74,6 +74,5 @@ const configs = {
 		},
 	},
 };
-let config = configs[env];
+const config = module.exports = configs[env];
 config.env = env;
-module.exports = config;

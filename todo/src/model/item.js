@@ -1,5 +1,6 @@
 /**
  * Item model
+ * @exports object (A single DB model)
  */
 
 'use strict';

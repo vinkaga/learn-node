@@ -21,7 +21,6 @@ const rec = { desc: 'a todo item', trans: 'translated item' };
 describe("Models: Item", () => {
 
 	before(() => {
-		// Returning a promise is an alternative to 'done'
 		return db.sequelize.sync({force: true}); // Clean DB
 	});
 

@@ -1,8 +1,8 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "Example To-do List REST Service",
-  "main": "src/app.js",
+  "description": "Example To-do Service",
+  "main": "src/server.js",
   "scripts": {
     "test": "npm test"
   },
@@ -10,19 +10,10 @@
     "type": "git",
     "url": "https://github.com/vinkaga/learn-node/tree/master/todo"
   },
-  "keywords": [
-    "NodeJS",
-    "JavaScript",
-    "HapiJS",
-    "REST"
-  ],
-  "author": "Vinay Agarwal",
-  "license": "MIT",
   "dependencies": {
     "bluebird": "3.4.1",
     "bunyan": "1.8.1",
     "hapi": "14.1.0",
-    "lodash": "4.14.2",
     "mysql": "2.11.1",
     "request": "2.74.0",
     "request-promise": "4.1.1",

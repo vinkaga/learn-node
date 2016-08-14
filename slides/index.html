@@ -3,24 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <title>NodeJS and JavaScript for 2016 Onwards</title>
-  <meta name="description" content="NodeJS and JavaScript class proposal" />
-  <meta name="keywords" content="NodeJS, JavaScript, promises" />
+  <meta name="description" content="NodeJS 6.x/JavaScript ES6 Tutorial" />
+  <meta name="keywords" content="NodeJS, JavaScript, promises, microservice, testing" />
   <style>
-    @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
-    @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-    @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700,400italic);
+    @import 'https://fonts.googleapis.com/css?family=Martel|Source+Code+Pro|Yanone+Kaffeesatz';
 
     body {
-      font-family: 'Droid Serif';
+      font-family: 'Martel', serif;
+      font-size: 16px;
     }
-    h1, h2, h3 {
-      font-family: 'Yanone Kaffeesatz';
+    h1, h2, h3, h4 {
+      font-family: 'Yanone Kaffeesatz', sans-serif;
       font-weight: 400;
       margin-bottom: 0;
     }
+    .remark-slide-content { font-size: 1em; }
     .remark-slide-content h1 { font-size: 3em; }
     .remark-slide-content h2 { font-size: 2em; }
     .remark-slide-content h3 { font-size: 1.6em; }
+    .remark-slide-content h4 { font-size: 1.4em; margin-top: 1em}
     .footnote {
       position: absolute;
       bottom: 3em;
@@ -37,8 +38,8 @@
       border-radius: 5px;
     }
     .remark-code, .remark-inline-code {
-      font-family: 'Source Code Pro';
-      font-size: 15px;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 14px;
     }
     .remark-code-line-highlighted     {
       background-color: #373832;
@@ -63,12 +64,16 @@
     }
     .inverse {
       background: #272822;
-      color: #777872;
+      color: #b9bab2;
       text-shadow: 0 0 20px #333;
     }
     .inverse h1, .inverse h2 {
       color: #f3f3f3;
       line-height: 0.8em;
+    }
+    .inverse code {
+      background: #777872;
+      color: #fff;
     }
 
     /* Slide-specific styling */
@@ -113,12 +118,19 @@
       height: 92%;
       float: left;
     }
-    .left-column h2:last-of-type, .left-column h3:last-child {
+    .left-column h2:last-of-type, .left-column h3:last-of-type, .left-column h4:last-of-type {
       color: #000;
     }
     .right-column {
       width: 75%;
       float: right;
+    }
+    .center-column {
+      display: block;
+      width: 25%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
     }
   </style>
 </head>

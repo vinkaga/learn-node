@@ -17,7 +17,7 @@ Licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 ---
 layout: false
 .left-column[
-  ## About
+  ### About
 ]
 .right-column[
 
@@ -39,22 +39,54 @@ layout: false
 
 ]
 ---
-template: inverse
+layout: false
+.left-column[
+  ### Outline
+]
+.right-column[
 
-# 1. The Basics
+#### The Basics
 
+- Overview from 10K ft
+
+#### NodeJS
+
+- JavaScript language
+
+- NodeJS API
+
+#### The Quirks
+
+- JavaScript can feel 'different' from other languages. These are the some key difference.
+
+#### Promises, Promises
+
+- Taming the async programming using promises
+
+#### To Do Service
+
+- A trivial service built with rigor and best practices
+
+]
 ---
 template: inverse
 
 # 1. The Basics
-## What is it?
-## Why use it?
 
+Overview from 10K ft
+.center-column[
+- Overview
+
+- NPM
+
+- Simple Server
+]
 ---
 layout: false
 .left-column[
   ## 1. Basics
-  ###What is it?
+  ### Overview
+  #### What is it?
 ]
 .right-column[
 ####JavaScript
@@ -82,8 +114,9 @@ layout: false
 ---
 .left-column[
   ## 1. Basics
-  ### What is it?
-  ### Why use it?
+  ### Overview
+  #### What is it?
+  #### Why use it?
 ]
 .right-column[
 Not too many languages are fun for humans as well as efficient for machines!
@@ -92,18 +125,15 @@ Not too many languages are fun for humans as well as efficient for machines!
 
 <img src="langs.png" width="100%">
 ]
----
-template: inverse
-
-# 1. The Basics
-## Installing
-## Running
 
 ---
 layout: false
 .left-column[
   ## 1. Basics
-  ### Installing
+  ### Overview
+  #### What is it?
+  #### Why use it?
+  #### Installing
 ]
 .right-column[
 ####OS X
@@ -135,8 +165,11 @@ sudo n stable
 ---
 .left-column[
   ## 1. Basics
-  ### Installing
-  ### Running
+  ### Overview
+  #### What is it?
+  #### Why use it?
+  #### Installing
+  #### Running
 ]
 .right-column[
 ####REPL (Read Eval Print Loop)
@@ -159,18 +192,12 @@ hello world!
 ```
 ]
 ---
-template: inverse
-
-# 1. The Basics
-## NPM - Node Package Manager
-Like PHP `composer` but less painful
----
 name: how
 
 .left-column[
   ## 1. Basics
   ### NPM
-  #### - What?
+  #### What?
 ]
 .right-column[
 ####package.json
@@ -198,8 +225,8 @@ name: how
 .left-column[
   ## 1. Basics
   ### NPM
-  #### - What?
-  #### - How?
+  #### What?
+  #### How?
 ]
 .right-column[
 ####package.json
@@ -232,8 +259,8 @@ name: how
 .left-column[
   ## 1. Basics
   ### NPM
-  #### - What?
-  #### - How?
+  #### What?
+  #### How?
 ]
 .right-column[
 ####Updating dependencies
@@ -257,15 +284,10 @@ npm ERR! Test failed.  See above for more details.
 - `npm run myscript`
 ]
 ---
-template: inverse
-
-# 1. The Basics
-## Simple Server
----
 .left-column[
   ## 1. Basics
   ### Simple Server
-  #### - Editor
+  #### Editor
 ]
 .right-column[
 ####WebStorm/PHPStorm
@@ -292,8 +314,8 @@ template: inverse
 .left-column[
   ## 1. Basics
   ### Simple Server
-  #### - Editor
-  #### - Creating
+  #### Editor
+  #### Creating
 ]
 .right-column[
 - Create `server.js` in `basics/src`
@@ -333,9 +355,9 @@ server.start(function(err) {
 .left-column[
   ## 1. Basics
   ### Simple Server
-  #### - Editor
-  #### - Creating
-  #### - Testing
+  #### Editor
+  #### Creating
+  #### Testing
 ]
 .right-column[
 - `npm install --save-dev lab code`
@@ -374,10 +396,10 @@ describe("Basic HTTP Tests", function() {
 .left-column[
   ## 1. Basics
   ### Simple Server
-  #### - Editor
-  #### - Creating
-  #### - Testing
-  #### - Code Coverage
+  #### Editor
+  #### Creating
+  #### Testing
+  #### Code Coverage
 ]
 .right-column[
 - Add the following in `package.json` > `scripts`
@@ -396,16 +418,17 @@ describe("Basic HTTP Tests", function() {
 template: inverse
 
 # 2. NodeJS
----
-template: inverse
-
-# 2. NodeJS
-## JavaScript Language
+Language and Runtime
+.center-column[
+- JavaScript Language
+- NodeJS Runtime
+- Libraries
+]
 ---
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
+  #### Basics
 ]
 .right-column[
 
@@ -429,14 +452,14 @@ template: inverse
 
 - `==` vs `===` etc. - the former converts type
 
-- `use strict;` disable legacy bad syntax
+- `'use strict';` disable legacy bad syntax
 ]
 ---
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Strings
+  #### Basics
+  #### Strings
 ]
 .right-column[
 
@@ -471,9 +494,9 @@ let b = `bbb${a.toLowerCase()+'y'}eee`; // bbbquxyeee
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Strings
-  #### - Arrays
+  #### Basics
+  #### Strings
+  #### Arrays
 ]
 .right-column[
 
@@ -496,7 +519,7 @@ for (let item of items) {
 }
 ```
 
-- Assignment does *not* copy arrays, use `slice`
+- Assignment does *not* copy arrays (like PHP), use `slice`
 
 - `push`, `pop`, `shift`, `unshift`
 
@@ -511,9 +534,9 @@ for (let item of items) {
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
+  #### Basics
+  #### Arrays
+  #### Functions
 ]
 .right-column[
 
@@ -550,10 +573,10 @@ let d = b(undefined);  // 4
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
-  #### - Objects
+  #### Basics
+  #### Arrays
+  #### Functions
+  #### Objects
 ]
 .right-column[
 
@@ -581,11 +604,11 @@ for (var prop in obj) {
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
-  #### - Objects
-  #### - Maps
+  #### Basics
+  #### Arrays
+  #### Functions
+  #### Objects
+  #### Maps
 ]
 .right-column[
 
@@ -623,12 +646,12 @@ for (let [key, value] of map.entries()) {
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
-  #### - Objects
-  #### - Maps
-  #### - Classes
+  #### Basics
+  #### Arrays
+  #### Functions
+  #### Objects
+  #### Maps
+  #### Classes
 ]
 .right-column[
 
@@ -670,13 +693,13 @@ cp.area;
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
-  #### - Objects
-  #### - Maps
-  #### - Classes
-  #### - Namespace
+  #### Basics
+  #### Arrays
+  #### Functions
+  #### Objects
+  #### Maps
+  #### Classes
+  #### Namespace
 ]
 .right-column[
 
@@ -708,14 +731,14 @@ cp.area;
 .left-column[
   ## 2. NodeJS
   ### Language
-  #### - Basics
-  #### - Arrays
-  #### - Functions
-  #### - Objects
-  #### - Maps
-  #### - Classes
-  #### - Namespace
-  #### - Misc
+  #### Basics
+  #### Arrays
+  #### Functions
+  #### Objects
+  #### Maps
+  #### Classes
+  #### Namespace
+  #### Misc
 ]
 .right-column[
 
@@ -742,16 +765,10 @@ let deleted = Reflect.deleteProperty(target, 'foo');
 
 ]
 ---
-template: inverse
-
-# 2. NodeJS
-## Language
-## API
----
 .left-column[
   ## 2. NodeJS
-  ### API
-  #### - Overview
+  ### Runtime
+  #### Overview
 ]
 .right-column[
 
@@ -782,9 +799,9 @@ set NODE_ENV=production && npm start
 ---
 .left-column[
   ## 2. NodeJS
-  ### API
-  #### - Overview
-  #### - Functionality
+  ### Runtime
+  #### Overview
+  #### API
 ]
 .right-column[
 
@@ -815,10 +832,10 @@ fs.unlink('/tmp/hello', (err) => {
 ---
 .left-column[
   ## 2. NodeJS
-  ### API
-  #### - Overview
-  #### - Functionality
-  #### - Events
+  ### Runtime
+  #### Overview
+  #### API
+  #### Events
 ]
 .right-column[
 
@@ -843,11 +860,11 @@ myEvent.emit('crzy', 'crazy event');
 ---
 .left-column[
   ## 2. NodeJS
-  ### API
-  #### - Overview
-  #### - Functionality
-  #### - Events
-  #### - Module
+  ### Runtime
+  #### Overview
+  #### API
+  #### Events
+  #### Module
 ]
 .right-column[
 
@@ -879,12 +896,12 @@ myEvent.emit('crzy', 'crazy event');
 ---
 .left-column[
   ## 2. NodeJS
-  ### API
-  #### - Overview
-  #### - Functionality
-  #### - Events
-  #### - Module
-  #### - Create Module
+  ### Runtime
+  #### Overview
+  #### API
+  #### Events
+  #### Module
+  #### Create Module
 ]
 .right-column[
 - In folder `nodejs`, create `sq.js`
@@ -911,13 +928,6 @@ console.log(sq(2));
 4
 ```
 ]
----
-template: inverse
-
-# 2. NodeJS
-## Language
-## API
-## Libraries
 ---
 .left-column[
   ## 2. NodeJS
@@ -948,6 +958,14 @@ template: inverse
 
 # 3. The Quirks
 What may surprise you
+.center-column[
+- Single Threaded
+- Objects v. Primitives
+- `this`
+- Sequential I/O
+- Exceptions
+- Closures
+]
 ---
 .left-column[
   ## 3. Quirks
@@ -1119,6 +1137,8 @@ async.series([
 	console.log('Account creation ' + (err ? 'error' : 'success'));
 });
 ```
+
+- Sequential operations using promises discussed later
 ]
 ---
 .left-column[
@@ -1232,10 +1252,17 @@ for (let i = 0; i < 5; i++) {
 template: inverse
 
 # 4. Promises, promises
+Async code made easier
+.center-column[
+- What?
+- Properties
+- Usage
+- Overhead
+]
 ---
 .left-column[
   ## 4. Promises
-  #### What?
+  ### What?
 ]
 .right-column[
 
@@ -1249,7 +1276,7 @@ db.user.read(id, function(err, data) {
 console.log(data);   // undefined
 ```
 
-- Convenient for programming
+- But the following is the most convenient for programming
 
 ```JavaScript
 let user = db.user.read(id);
@@ -1272,8 +1299,8 @@ console.log(user);   // user from DB
 ---
 .left-column[
   ## 4. Promises
-  #### What?
-  #### Properties
+  ### What?
+  ### Properties
 ]
 .right-column[
 
@@ -1313,9 +1340,9 @@ let promise = new Promise(function(resolve, reject) {
 ---
 .left-column[
   ## 4. Promises
-  #### What?
-  #### Properties
-  #### Usage
+  ### What?
+  ### Properties
+  ### Usage
 ]
 .right-column[
 
@@ -1355,9 +1382,9 @@ db.user.create(userin)
 ---
 .left-column[
   ## 4. Promises
-  #### What?
-  #### Properties
-  #### Usage
+  ### What?
+  ### Properties
+  ### Usage
 ]
 .right-column[
 
@@ -1393,7 +1420,7 @@ some().then(function(res) {
 });
 ```
 
-- Best practice: Make all async interfaces promises
+- Best practice: make all async interfaces promises
 
 ]
 ---
@@ -1443,11 +1470,19 @@ promises-medikoo-deferred.js              4207      357.60
 ---
 template: inverse
 
-# 5. A Microservice
-Code, Document, Test, Code-coverage
+# 5. To Do Service
+A trivial service built with rigor and best practices
+.center-column[
+- Overview
+- Components
+- Documentation
+- Coverage
+- Testing Critical Areas
+]
 ---
 .left-column[
-  ## 5. Microservice
+  ## 5. To Do Service
+  ### Overview
   #### Goals
 ]
 .right-column[
@@ -1471,19 +1506,20 @@ Code, Document, Test, Code-coverage
 ]
 ---
 .left-column[
-  ## 5. Microservice
+  ## 5. To Do Service
+  ### Overview
   #### Goals
-  #### TO Do Service
+  #### Description
 ]
 .right-column[
 
 - REST service to store to-do list. 
 
-- To-do items are posted in English. Server uses a translation service [Yandex](https://translate.yandex.com/developers) to convert items to Spanish.
+- To-do items and their Spanish translations are stored. Server uses [Yandex](https://translate.yandex.com/developers) service.
 
 - No users, accounts or authentication
 
-- Uses Hapi framework
+- Uses [Hapi framework](http://hapijs.com/api)
 
 - DB storage through [Sequelize ORM](http://docs.sequelizejs.com/en/latest/)
 
@@ -1491,29 +1527,28 @@ Code, Document, Test, Code-coverage
 
 - REST client promise interface [Request-Promise](https://github.com/request/request-promise)
 
-- Promise [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
+- Promise library [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
 
 - Logging with [Bunyan](https://github.com/trentm/node-bunyan)
-
-- Utility library [lodash]()
-
-- Automatically generated documentation
-
-- Create appropriate tests
-
-- Measure code coverage
-
-- Testing critical areas
 
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Overview
+  #### Goals
+  #### Description
+  #### Plan
 ]
 .right-column[
 
-- `npm init` and create other folders as follows
+- Build from bottom up - low-level components first, high-level later
+
+- Create tests for components along the way
+
+- `npm init` 
+
+- Create other folders as follows
 
 ```
 src
@@ -1530,21 +1565,23 @@ docs
 package.json
 ```
 
-- `npm install --save hapi sequelize mysql request-promise bluebird bunyan lodash`
+- `npm install --save hapi sequelize mysql request-promise bluebird bunyan`
 
 - `npm install --save-dev lab code`
+
+- `npm install -g lab`
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Components
   #### Config
 ]
 .right-column[
 
 - Server global config, depends on run environment
 
-- `config.js` in project root
+- Create `config.js` in project root
 
 ```JavaScript
 const env = process.env.NODE_ENV || 'development';
@@ -1559,24 +1596,54 @@ const configs = {
 			host: 'localhost',
 			port: 3306
 		},
+		translate: {
+			url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
+			key: 'trnsl.1.1.20160805T143434Z.8ad64dde3d4eea98.6632d4e5d70a8856294dca911558615dd5ce1c4c',
+			lang: 'es',
+		},
 		logger: {
 			name: 'todo-dev',
 			level: 'info',
 			stream: process.stdout,
 		},
 	},
-	...
+	test: {},
+	production: {},
 };
-let config = configs[env];
+const config = module.exports = configs[env];
 config.env = env;
-module.exports = config;
 ```
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Components
   #### Config
+  #### Logger
+]
+.right-column[
+
+- Bunyan logger logs in JSON (for ease of parsing)
+
+- For readability, it allows traditional looking display for console
+
+- Logger module exports an instantiated logger object
+ 
+- In folder `src/util`, create `logger.js`
+
+```JavaScript
+const config = require('../../config');
+const bunyan = require('bunyan');
+
+module.exports = bunyan.createLogger(config.logger);
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
   #### Model
 ]
 .right-column[
@@ -1585,10 +1652,12 @@ module.exports = config;
  
 - Two columns `desc` and `trans` 256 char max, not empty
 
+- Each individual model module exports a model object
+
 - In folder `src/model`, create `item.js`
 
 ```JavaScript
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
 	return sequelize.define('item', {
 		desc: {
 			type: DataTypes.STRING(256),
@@ -1608,14 +1677,15 @@ module.exports = function(sequelize, DataTypes) {
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Components
   #### Config
+  #### Logger
   #### Model
 ]
 .right-column[
 
-- Database public interface 
+- Database public interface exports all model objects and underlying DB classes
 
 - In folder `src/model`, create `index.js`
 
@@ -1629,26 +1699,28 @@ const sequelize = new Sequelize(config.db.name, config.db.username, config.db.pa
 	logging: false,
 });
 
-const models = {
+const db = module.exports = {
 	Sequelize: Sequelize,
 	sequelize: sequelize,
 };
-module.exports = models;
 
-const names = [
+const models = [
 	'item',
 ];
 
-for (let name of names) {
-	models[name] = sequelize.import(__dirname + '/' + name)
+for (const model of models) {
+	db[model] = sequelize.import(__dirname + '/' + model)
 }
+
+// Model associations if any
 ```
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Components
   #### Config
+  #### Logger
   #### Model
   #### Model Test
 ]
@@ -1664,6 +1736,7 @@ for (let name of names) {
 process.env.NODE_ENV = 'test';
 const db = require('../../src/model/index');
 const Promise = require('bluebird');
+
 const Code = require('code');
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
@@ -1673,23 +1746,23 @@ const before = lab.before;
 const expect = Code.expect;
 const fail = Code.fail;
 
-const rec = { desc: 'a todo item', trans: 'translated item' };
-
 describe("Models: Item", () => {
 
 	before(() => {
 		return db.sequelize.sync({force: true}); // Clean DB
 	});
+	
+	// Tests go here
 
-    // Tests go here
 });
 ```
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
+  ## 5. To Do Service
+  ### Components
   #### Config
+  #### Logger
   #### Model
   #### Model Test
 ]
@@ -1702,58 +1775,337 @@ describe("Models: Item", () => {
 - No equivalent to PHPUnit `dataProvider` - use promise or `async` to test with multiple conditions
 
 ```JavaScript
-	it('should create OK', () => {
-		return db.item.create(rec).then(() => {
-			db.item.find({where: {desc: rec.desc}}).then((item) => {
-				expect(item.desc).to.equal(rec.desc);
-			});
+it('should create OK', () => {
+	return db.item.create(rec).then(() => {
+		db.item.find({where: {desc: rec.desc}}).then((item) => {
+			expect(item.desc).to.equal(rec.desc);
+		});
+	});
+});
+
+it('should fail creating', () => {
+	return Promise.all([
+		db.item.create({desc: rec.desc}).then(() 			=> { fail('created with missing trans') }).catch((e) => {}),
+		db.item.create({desc: rec.desc, trans: ''}).then(() => { fail('created with empty desc') }).catch((e) => {}),
+		db.item.create({trans: rec.trans}).then(() 			=> { fail('created with missing desc') }).catch((e) => {}),
+		db.item.create({desc: '', trans: rec.trans}).then(()=> { fail('created with empty desc') }).catch((e) => {}),
+	]);
+});
+```
+
+- Run specific test with
+
+```
+lab -v test/model/item.js
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation Service
+]
+.right-column[
+
+- Abstract out translation service into its own module
+
+- Translation module exports a single translate function 
+
+- In folder `src/util`, create `translate.js`
+
+```JavaScript
+const config = require('../../config');
+const Promise = require('bluebird');
+const request = require('request-promise').defaults({
+	uri: config.translate.url, 
+	qs: { key: config.translate.key, lang: config.translate.lang, }, 
+	json: true,
+});
+
+/**
+ * Translate a string
+ * @param input string
+ * @returns Promise (resolves to translated string)
+ */
+module.exports = (input) => {
+	if (!input || typeof input !== 'string') {
+		return Promise.reject('Invalid input');
+	}
+	return request.get({
+		qs: { text: input },
+	}).then((body) => {
+		if (typeof body.text === 'object' && body.text instanceof Array) {
+			return Promise.resolve(body.text[0]);
+		}
+		return Promise.reject('Invalid service response');
+	});
+};
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation
+  #### Translation Test
+]
+.right-column[
+
+- Validate translation module and dependencies
+
+- In folder `test/util`, create `translate.js`
+
+```JavaScript
+process.env.NODE_ENV = 'test';
+const translate = require('../../src/util/translate');
+const Code = require('code');
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const it = lab.it;
+const expect = Code.expect;
+const fail = Code.fail;
+
+describe("Models: Item", () => {
+
+	it('should translate', () => {
+		return translate('hello').then((str) => {
+			expect(str).to.equal('hola');
 		});
 	});
 
-	it('should fail creating', () => {
-		return Promise.all([
-			db.item.create({desc: rec.desc}).then(() 			=> { fail('created with missing trans') }).catch((e) => {}),
-			db.item.create({desc: rec.desc, trans: ''}).then(() => { fail('created with empty desc') }).catch((e) => {}),
-			db.item.create({trans: rec.trans}).then(() 			=> { fail('created with missing desc') }).catch((e) => {}),
-			db.item.create({desc: '', trans: rec.trans}).then(()=> { fail('created with empty desc') }).catch((e) => {}),
-		]);
+	it('should fail translating', () => {
+		return translate('')
+			.then((str) => {
+				fail('Unexpected success');
+			})
+			.catch((e) => {});
+	});
+});
+```
+
+```
+lab -v test/util/translate.js
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation
+  #### Translation Test
+  #### Controller
+]
+.right-column[
+
+- A single controller - item
+
+- Each controller exports handlers for all HTTP methods it supports
+ 
+- In folder `src/controller`, create `item.js`
+
+```JavaScript
+const db = require('../model/index');
+const translate = require('../util/translate');
+const Boom = require('boom');
+
+const get = {
+	method: 'GET',
+	path: '/',
+	handler: (request, reply) => {
+		db.item.findAll()
+			.then((items) => {
+				return reply(items.map((e) => (e.get())));
+			})
+			.catch((err) => {
+				return reply(Boom.badImplementation(err));
+			});
+	},
+};
+
+const post = {...};
+
+const del = {...};
+
+module.exports = [get, post, del];
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation
+  #### Translation Test
+  #### Controller
+]
+.right-column[
+
+- POST and DELETE handlers
+ 
+```JavaScript
+const post = {
+	method: 'POST', path: '/',
+	handler: (request, reply) => {
+		if (!request.payload) {
+			return reply(Boom.badRequest('Item is required'));
+		}
+		translate(request.payload).then((trans) => {
+				return db.item.create({
+					desc: request.payload,
+					trans: trans,
+				});
+			}).then((item) => {
+				return reply('created').code(201);
+			}).catch((err) => {
+				return reply(Boom.badImplementation(err));
+			});
+	},
+};
+
+const del = {
+	method: 'DELETE', path: '/{id}',
+	handler: (request, reply) => {
+		db.item.destroy({where: {id: request.params.id}}).then((rows) => {
+				if (rows === 1) {
+					return reply('success');
+				}
+				return reply(Boom.badRequest('Item doesn\'t exist'));
+			}).catch((err) => {
+				return reply(Boom.badImplementation(err));
+			});
+	},
+};
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation
+  #### Translation Test
+  #### Controller
+]
+.right-column[
+
+- Controller public interface exports all handlers of all controllers
+
+- In folder `src/controller`, create `index.js`
+
+```JavaScript
+const config = require('../../config');
+ 
+ const routes = module.exports = [];
+ 
+ const controllers = [
+ 	'item',
+ ];
+ 
+ for (const controller of controllers) {
+ 	routes.push(...(require('./' + controller)));
+ }
+```
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Components
+  #### Config
+  #### Logger
+  #### Model
+  #### Model Test
+  #### Translation
+  #### Translation Test
+  #### Controller
+  #### Server
+]
+.right-column[
+
+- Main server is also a module (for ease of testing)
+
+- Server module exports instantiated server object
+
+- In folder `src/controller`, create `index.js`
+
+```JavaScript
+const config = require('../config');
+const db = require('./model/index');
+const logger = require('./util/logger');
+const routes = require('./controller/index');
+const Hapi = require('hapi');
+
+const server = module.exports = new Hapi.Server();
+
+server.connection({ port: config.port });
+server.route(routes);
+
+db.sequelize.sync()
+	.then(function() {
+		return server.start();
+	})
+	.then(function() {
+		logger.warn('Server Restart: ' + server.info.uri);
+	})
+	.catch((err) => {
+		logger.fatal(err);
 	});
 ```
 ]
 ---
 .left-column[
-  ## 5. Microservice
-  ### TO Do Service
-  #### Config
-  #### Model
-  #### Model Test
-  #### Controller
+  ## 5. To Do Service
+  ### Scripts
 ]
 .right-column[
 
-- Tests for success and error cases
+- Edit `package.json` to add the following scripts
 
-- Typically, there are many error cases for each success case
-
-- No equivalent to PHPUnit `dataProvider` - use promise or `async` to test with multiple conditions
-
-```JavaScript
-	it('should create OK', () => {
-		return db.item.create(rec).then(() => {
-			db.item.find({where: {desc: rec.desc}}).then((item) => {
-				expect(item.desc).to.equal(rec.desc);
-			});
-		});
-	});
-
-	it('should fail creating', () => {
-		return Promise.all([
-			db.item.create({desc: rec.desc}).then(() 			=> { fail('created with missing trans') }).catch((e) => {}),
-			db.item.create({desc: rec.desc, trans: ''}).then(() => { fail('created with empty desc') }).catch((e) => {}),
-			db.item.create({trans: rec.trans}).then(() 			=> { fail('created with missing desc') }).catch((e) => {}),
-			db.item.create({desc: '', trans: rec.trans}).then(()=> { fail('created with empty desc') }).catch((e) => {}),
-		]);
-	});
+```JSON
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Example To-do Service",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinkaga/learn-node/tree/master/todo"
+  },
+  "dependencies": {
+    "bluebird": "3.4.1",
+    "bunyan": "1.8.1",
+    "hapi": "14.1.0",
+    "mysql": "2.11.1",
+    "request": "2.74.0",
+    "request-promise": "4.1.1",
+    "sequelize": "3.23.6"
+  },
+  "devDependencies": {
+    "code": "3.0.2",
+    "lab": "10.9.0"
+  }
+}
 ```
 ]
 ---

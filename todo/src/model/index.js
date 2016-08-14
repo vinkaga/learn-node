@@ -1,5 +1,6 @@
 /**
  * DB Models module
+ * @exports object (containing other objects - DB models and DB instance)
  */
 
 'use strict';
@@ -12,18 +13,17 @@ const sequelize = new Sequelize(config.db.name, config.db.username, config.db.pa
 	logging: false,
 });
 
-const models = {
+const db = module.exports = {
 	Sequelize: Sequelize,
 	sequelize: sequelize,
 };
-module.exports = models;
 
-const names = [
+const models = [
 	'item',
 ];
 
-for (let name of names) {
-	models[name] = sequelize.import(__dirname + '/' + name)
+for (const model of models) {
+	db[model] = sequelize.import(__dirname + '/' + model)
 }
 
 // Model associations if any

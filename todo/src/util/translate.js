@@ -1,5 +1,6 @@
 /**
- * DB Models module
+ * Translation module
+ * @exports function (translate function)
  */
 
 'use strict';
@@ -27,6 +28,9 @@ module.exports = (input) => {
 	return request.get({
 		qs: { text: input },
 	}).then((body) => {
-		return Promise.resolve(body.text[0]);
+		if (typeof body.text === 'object' && body.text instanceof Array) {
+			return Promise.resolve(body.text[0]);
+		}
+		return Promise.reject('Invalid service response');
 	});
 };
