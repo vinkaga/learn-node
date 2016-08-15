@@ -3,7 +3,7 @@ layout: true
 class: center, middle, inverse
 ---
 # NodeJS and JavaScript for 2016 Onwards
-Server side JavaScript (NodeJS 6) for API development
+A server side JavaScript/NodeJS 6.x tutorial (beginner to intermediate)
 
 Beginner to intermediate
 
@@ -49,11 +49,9 @@ layout: false
 
 - Overview from 10K ft
 
-#### NodeJS
+#### NodeJS Ecosystem
 
-- JavaScript language
-
-- NodeJS API
+- JavaScript language, NodeJS runtime and libraries
 
 #### The Quirks
 
