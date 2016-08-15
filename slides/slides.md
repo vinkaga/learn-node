@@ -417,7 +417,7 @@ describe("Basic HTTP Tests", function() {
 ---
 template: inverse
 
-# 2. NodeJS
+# 2. NodeJS Ecosystem
 Language and Runtime
 .center-column[
 - JavaScript Language
@@ -891,6 +891,8 @@ myEvent.emit('crzy', 'crazy event');
 - `require('foo')` imports what `foo` exports
 
 - Module name vs path: name is looked up in `node_modules` folder
+
+- Modules are cached - repeated `require` *does not* repeatedly execute module code
 ]
 
 ---
@@ -959,6 +961,7 @@ template: inverse
 # 3. The Quirks
 What may surprise you
 .center-column[
+- Quiet
 - Single Threaded
 - Objects v. Primitives
 - `this`
@@ -969,6 +972,35 @@ What may surprise you
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
+]
+.right-column[
+
+- In many situations, JavaScript *does not* produce warnings/errors where other languages would
+
+####Objects
+
+```JavaScript
+let o = {a:1};
+console.log(o.b);  // undefined, no unknown property error
+```
+
+####Arrays
+
+```JavaScript
+let a = [1];
+console.log(a[2]);     // undefined, no index out of bounds error
+console.log(a[-1]);    // undefined, no index out of bounds error
+console.log(a.myprop); // undefined, no illegal operation error (arrays are objects)
+a['aprop'] = 'red';    // No error when array is treated like an object
+console.log(a);        // [ 1, aprop: 'red' ] what???
+console.log(a.length); // 1 not 2!!!
+```
+]
+---
+.left-column[
+  ## 3. Quirks
+  #### Quiet
   #### Single threaded
 ]
 .right-column[
@@ -1002,6 +1034,7 @@ setTimeout(callback, delay);
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
 ]
@@ -1041,6 +1074,7 @@ typeof undefined; // 'undefined'
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
@@ -1069,6 +1103,7 @@ setTimeout(person.showName.bind(person), 10); // 'Brad Pitt'
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
@@ -1103,6 +1138,7 @@ golf.showPlayers2();  // OK
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
@@ -1143,6 +1179,7 @@ async.series([
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
@@ -1186,6 +1223,7 @@ try {
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
@@ -1220,6 +1258,7 @@ foo.get();            // 5
 ---
 .left-column[
   ## 3. Quirks
+  #### Quiet
   #### Single threaded
   #### Objects v. Primitives
   #### `this`
