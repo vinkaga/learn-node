@@ -55,7 +55,7 @@ layout: false
 
 #### The Quirks
 
-- JavaScript can feel 'different' from other languages. These are the some key difference.
+- JavaScript can feel 'different' from other languages. These are some of those 'surprises.'
 
 #### Promises, Promises
 

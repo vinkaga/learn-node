@@ -1,27 +1,68 @@
 # learn-node
 
-##About
-Learn NodeJS, Build Microservices Using Hapi
+NodeJS and JavaScript for 2016 Onwards
 
-- Not an introduction to programming. Audience should be well-versed in one or more programming languages.
+A slides based server side JavaScript/NodeJS 6.x tutorial (beginner to intermediate)
 
-- Uses PHP and Java for reference
+##Outline
 
-- Will not go into obvious stuff - easily guessed or Googled
+#### The Basics
 
-- Will not go into historical constructs.
+Overview from 10K ft
 
-- Focused on high performance and maintainability
+- Overview
+- NPM
+- Simple Server
 
-- Uses Hapi framework
 
-- Benchmark data from [vinkaga/node6perf](https://github.com/vinkaga/node6perf)
+#### NodeJS Ecosystem
 
-- Opinionated :-)
+JavaScript language, NodeJS runtime and libraries
 
+- JavaScript Language
+- NodeJS Runtime
+- Libraries
+
+
+#### The Quirks
+
+JavaScript can feel 'different' from other languages. These are some of those 'surprises.'
+
+- Quiet
+- Single Threaded
+- Objects v. Primitives
+- `this`
+- Sequential I/O
+- Exceptions
+- Closures
+
+
+#### Promises, Promises
+
+Taming the async programming using promises
+
+- What?
+- Properties
+- Usage
+- Overhead
+
+#### To Do Service
+
+A trivial service built with rigor and best practices
+
+- Overview
+- Components
+- Validation
+- Scripts
+- Documentation
+- Coverage
 
 
 ##To View Slides
+
+[https://vinkaga.gitlab.io/learn-node/](https://vinkaga.gitlab.io/learn-node/)
+
+or
 
 ```
 npm install http-server -g # If isn't installed already
