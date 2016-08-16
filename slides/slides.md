@@ -1445,7 +1445,27 @@ Promise.all([
 .catch(...);
 ```
 
-- No rejection handler: Unhandled rejection error
+- A single `then` unwraps a promise no matter how deep
+
+```JavaScript
+Promise.resolve('one level').then((r) => {
+	console.log(r);  // one level
+});
+Promise.resolve(Promise.resolve(Promise.resolve('3 level'))).then((r) => {
+	console.log(r);  // 3 level
+});
+```
+]
+---
+.left-column[
+  ## 4. Promises
+  ### What?
+  ### Properties
+  ### Usage
+]
+.right-column[
+
+- If no rejection handler found: Unhandled rejection error
 
 ```JavaScript
 const Promise = require('bluebird');
