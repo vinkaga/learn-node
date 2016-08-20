@@ -3,7 +3,7 @@ layout: true
 class: center, middle, inverse
 ---
 # NodeJS and JavaScript for 2016 Onwards
-A server side JavaScript/NodeJS 6.x tutorial (beginner to intermediate)
+A server side JavaScript/NodeJS 6.x tutorial
 
 Beginner to intermediate
 
@@ -355,6 +355,35 @@ server.start(function(err) {
   ### Simple Server
   #### Editor
   #### Creating
+  #### Debugging
+]
+.right-column[
+
+####By Printing
+
+- Simply printing through `console.log` can be the fastest way to debug
+
+####Debugger
+
+- Debugger is helpful in more complex debug situations 
+
+- Allows debugging on remote servers
+
+- [WebStorm/PHPStorm NodeJS debug setup](https://www.jetbrains.com/help/webstorm/2016.2/running-and-debugging-node-js.html)
+
+- [Visual Studio Code NodeJS debug setup](https://code.visualstudio.com/docs/editor/debugging)
+
+- Debug demos
+
+]
+
+---
+.left-column[
+  ## 1. Basics
+  ### Simple Server
+  #### Editor
+  #### Creating
+  #### Debugging
   #### Testing
 ]
 .right-column[
@@ -396,6 +425,7 @@ describe("Basic HTTP Tests", function() {
   ### Simple Server
   #### Editor
   #### Creating
+  #### Debugging
   #### Testing
   #### Code Coverage
 ]
@@ -974,7 +1004,7 @@ What may surprise you
 ]
 .right-column[
 
-- In many situations, JavaScript *does not* produce warnings/errors where other languages would
+- JavaScript *does not* produce errors where other languages would
 
 ####Objects
 
@@ -990,10 +1020,27 @@ let a = [1];
 console.log(a[2]);     // undefined, no index out of bounds error
 console.log(a[-1]);    // undefined, no index out of bounds error
 console.log(a.myprop); // undefined, no illegal operation error (arrays are objects)
-a['aprop'] = 'red';    // No error when array is treated like an object
+a['aprop'] = 'red';    // No illegal operation error
 console.log(a);        // [ 1, aprop: 'red' ] what???
 console.log(a.length); // 1 not 2!!!
 ```
+
+####Primitives
+
+```JavaScript
+console.log((2).aprop);   // undefined, no illegal operation error
+console.log('str'.aprop); // undefined, no illegal operation error
+console.log(true.aprop);  // undefined, no illegal operation error
+```
+
+####`undefined`, `null` do generate error
+
+```JavaScript
+console.log(undefined.aprop); // TypeError: Cannot read property 'aprop' of undefined
+console.log(null.aprop);      // TypeError: Cannot read property 'aprop' of null
+```
+
+
 ]
 ---
 .left-column[
