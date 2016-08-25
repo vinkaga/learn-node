@@ -76,3 +76,7 @@ Browse to localhost:8080.
 Slides licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
 
 Remaining project licensed under MIT License.
+
+##Credits
+
+- [Alex Indigo](https://github.com/alexindigo) for valuable feedback
