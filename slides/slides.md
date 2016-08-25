@@ -27,7 +27,7 @@ layout: false
 
 - Will not go into obvious stuff - easily guessed or Googled
 
-- Will not go into historical constructs.
+- Will not go into historical constructs
 
 - Focused on high performance and maintainability
 
@@ -55,7 +55,7 @@ layout: false
 
 #### The Quirks
 
-- JavaScript can feel 'different' from other languages. These are some of those 'surprises.'
+- The awesome things about JavaScript that may surprise you
 
 #### Promises, Promises
 
@@ -108,6 +108,8 @@ layout: false
 - Current version 6.3.0. Supports almost all ES6 (https://kangax.github.io/compat-table/es6/)
 
 - https://nodejs.org/dist/latest-v6.x/docs/api/
+
+- NodeJS 6.x will be production ready in October 2016
 ]
 ---
 .left-column[
@@ -198,25 +200,26 @@ name: how
   #### What?
 ]
 .right-column[
+
+- Node Package Manager
+
+- Provides dependency management and public user interface
+
 ####package.json
 
-- name, version, description etc.
-
-- license, homepage, author/contributors, repository
+- name, version, description, license, homepage, author/contributors, repository etc.
 
 - dependencies, devDependencies
 
-- scripts
+- scripts - public user interface
+
+####npm-shrinkwrap.json
+
+- To lock-down dependencies (similar to `composer.lock`)
 
 ####node_modules
 
- - holds all dependencies
-
-####Best Practices
-
-- Use exact versions for dependencies. No equivalent of PHP `composer.lock`.
-
-- Include scripts - anyone knows how to run or test
+ - Folder holds all dependencies, do not commit to repo
 
 ]
 ---
@@ -224,62 +227,89 @@ name: how
   ## 1. Basics
   ### NPM
   #### What?
-  #### How?
+  #### Workflow
 ]
 .right-column[
-####package.json
+####Creating new project
 - `npm init`
+
+####Specifying dependencies/devDependencies
 
 - `npm install --save hapi`
 
+- `npm install --save-dev lab`
+
 ```JSON
-{
-  "name": "basics",
-  "version": "1.0.0",
-  "description": "",
-  "main": "hello.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "hapi": "^13.4.1"
+    "hapi": "13.4.1"
+  },
+  "devDependencies": {
+    "lab": "10.8.2"
   }
-}
 ```
 
-- `npm install`
+- Or, edit `package.json` and run `npm install`
 
-- `node_modules` folder
+####Scripts (User interface)
+```JSON
+  "scripts": {
+    "myscript": "echo running myscript"
+  },
+```
+
+- `npm run myscript`
 ]
 ---
 .left-column[
   ## 1. Basics
   ### NPM
   #### What?
-  #### How?
+  #### Workflow
 ]
 .right-column[
-####Updating dependencies
-- `sudo npm -g install npm-check-updates`
+####Committing to repo
+- `npm shrinkwrap` and commit `npm-shrinkwrap.json`
 
-- Run `ncu` to update `package.json`
+####Installing dependencies of an existing project
 
-####Scripts
-- `npm test`
+- `npm install`
 
-```
-~/p/n/basics $ npm test
+####Build/deploy
 
-> basics@1.0.0 test /Users/vagarwal/public_html/nodejs/basics
-> echo "Error: no test specified" && exit 1
+- Checkout, `npm install`, run tests and deploy tarball
 
-Error: no test specified
-npm ERR! Test failed.  See above for more details.
-```
+####Maintaining
 
-- `npm run myscript`
+- Dependencies need to be updated to get the latest capabilities/fixes
+
+- Updates can be disastrous
+
+- Controlled dependency update can alleviate the situation
+
+- I prefer using exact versions in `package.json` and updating it with `npm-check-updates` 
+
+]
+---
+.left-column[
+  ## 1. Basics
+  ### NPM
+  #### What?
+  #### Workflow
+  #### Contributing
+]
+.right-column[
+
+- Share your wonderful ideas with the rest of the world!
+
+- How do you get permission to publish to npm (or bower, ...)? You already have it.
+
+- Use free resources available - not just for open source projects
+
+1. Free unlimited repos: github/gitlab/bitbucket
+2. Free static site hosting: gitlab
+3. Free server: gitlab?
+4. Free CDN: CloudFlare
+5. Free email send/receive: Mailgun
 ]
 ---
 .left-column[
@@ -833,9 +863,13 @@ set NODE_ENV=production && npm start
 ]
 .right-column[
 
+- Documentation at https://nodejs.org/dist/latest-v6.x/docs/api/
+
+- Components provided by NodeJS don't need to be included in dependencies
+
 - File system: `fs` and `path`
 
-- `http`/`https`: typically used through a library
+- Networking `http`/`https`: typically used through a library
 
 - Multicore CPU support: [`cluster`](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
 
@@ -973,11 +1007,13 @@ console.log(sq(2));
 
 - ORM/ODM: [`sequelize`](http://docs.sequelizejs.com/en/latest/), [`mongoose`](http://mongoosejs.com/docs/guide.html) (not recommending MongoDB)
 
-- Logging: [`winston`](https://github.com/winstonjs/winston), [`bunyan`](https://github.com/trentm/node-bunyan)
+- Config: [`config`](https://github.com/lorenwest/node-config)
 
-- Servers: [`express`](http://expressjs.com/en/4x/api.html), [`meteor`](http://docs.meteor.com/#/full/) (not pure JS), [`hapi`](http://hapijs.com/api)
+- Logging: [`winston`](https://github.com/winstonjs/winston), [`bunyan`](https://github.com/trentm/node-bunyan) [`bole`](https://github.com/rvagg/bole)
 
-- Testing: [`mocha`](https://mochajs.org/), [`jasmine`](http://jasmine.github.io/2.4/introduction.html)
+- Servers: [`express`](http://expressjs.com/en/4x/api.html), [`restify`](http://restify.com/), [`meteor`](http://docs.meteor.com/#/full/) (not pure JS), [`hapi`](http://hapijs.com/api)
+
+- Testing: [`mocha`](https://mochajs.org/), [`jasmine`](http://jasmine.github.io/2.4/introduction.html), [`tap`](https://github.com/tapjs/node-tap), [`tape`](https://github.com/substack/tape)
 
 - Production: [`pm2`](http://pm2.keymetrics.io/)
 
@@ -987,7 +1023,7 @@ console.log(sq(2));
 template: inverse
 
 # 3. The Quirks
-What may surprise you
+The awesome things about JavaScript that may surprise you
 .center-column[
 - Quiet
 - Single Threaded
@@ -1143,6 +1179,8 @@ person.showName();                            // 'Brad Pitt'
 setTimeout(person.showName, 10);              // 'undefined undefined'
 setTimeout(person.showName.bind(person), 10); // 'Brad Pitt'
 ```
+
+- Note use of `bind` above
 ]
 
 ---
@@ -1278,7 +1316,7 @@ try {
 ]
 .right-column[
 
-- Closures keep access to outer scopes where they were defined (unlike object functions)
+- Closures keep access to outer scopes where they were defined.
 
 ```JavaScript
 function counter(start) {
@@ -1299,6 +1337,8 @@ foo.get();            // 5
 ```
 
 - `increment` and `get` have access to `count`!
+
+- This is unlike object functions that may require `bind` to access containing object.
 ]
 ---
 .left-column[
@@ -1673,7 +1713,7 @@ package.json
 
 - `npm install --save-dev lab code`
 
-- `sudo npm install -g bunyan lab npm-check-updates`
+- `npm install -g bunyan lab npm-check-updates`
 
 - Use exact version of dependencies: remove `^`
 
@@ -2482,6 +2522,8 @@ server.register([ Inert, Vision,
 
 #### Production
 - `npm run startProd` is just a demo script
+
+- Deploy with tarball instead of pulling dependencies
 
 - In actual production, use [`pm2`](http://pm2.keymetrics.io/) or [`cluster`](https://nodejs.org/dist/latest-v6.x/docs/api/cluster.html)
 

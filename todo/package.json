@@ -18,7 +18,7 @@
     "bluebird": "3.4.1",
     "bunyan": "1.8.1",
     "hapi": "14.1.0",
-    "hapi-swagger": "6.2.2",
+    "hapi-swagger": "7.0.1",
     "inert": "4.0.1",
     "mysql": "2.11.1",
     "request": "2.74.0",
