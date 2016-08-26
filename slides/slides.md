@@ -1053,7 +1053,7 @@ The awesome things about JavaScript that may surprise you
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
+  ### Quiet
 ]
 .right-column[
 
@@ -1098,8 +1098,8 @@ console.log(null.aprop);      // TypeError: Cannot read property 'aprop' of null
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
+  ### Quiet
+  ### Single threaded
 ]
 .right-column[
 
@@ -1132,9 +1132,9 @@ setTimeout(callback, delay);
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
 ]
 .right-column[
 
@@ -1172,10 +1172,10 @@ typeof undefined; // 'undefined'
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
 ]
 .right-column[
 
@@ -1203,10 +1203,10 @@ setTimeout(person.showName.bind(person), 10); // 'Brad Pitt'
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
 ]
 .right-column[
 
@@ -1238,11 +1238,11 @@ golf.showPlayers2();  // OK
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
-  #### Sequential I/O
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
+  ### Sequential I/O
 ]
 .right-column[
 
@@ -1279,12 +1279,12 @@ async.series([
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
-  #### Sequential I/O
-  #### Exceptions
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
+  ### Sequential I/O
+  ### Exceptions
 ]
 .right-column[
 
@@ -1323,13 +1323,13 @@ try {
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
-  #### Sequential I/O
-  #### Exceptions
-  #### Closures
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
+  ### Sequential I/O
+  ### Exceptions
+  ### Closures
 ]
 .right-column[
 
@@ -1360,13 +1360,13 @@ foo.get();            // 5
 ---
 .left-column[
   ## 3. Quirks
-  #### Quiet
-  #### Single threaded
-  #### Objects v. Primitives
-  #### `this`
-  #### Sequential I/O
-  #### Exceptions
-  #### Closures
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
+  ### Sequential I/O
+  ### Exceptions
+  ### Closures
 ]
 .right-column[
 
