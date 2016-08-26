@@ -2,6 +2,7 @@ name: inverse
 layout: true
 class: center, middle, inverse
 ---
+name: first
 # NodeJS and JavaScript for 2016 Onwards
 A server side JavaScript/NodeJS 6.x tutorial
 
@@ -68,6 +69,7 @@ layout: false
 ]
 ---
 template: inverse
+name: basics
 
 # 1. The Basics
 
@@ -80,6 +82,7 @@ Overview from 10K ft
 - Simple Server
 ]
 ---
+name: basics-overview
 layout: false
 .left-column[
   ## 1. Basics
@@ -112,6 +115,7 @@ layout: false
 - NodeJS 6.x will be production ready in October 2016
 ]
 ---
+name: langs
 .left-column[
   ## 1. Basics
   ### Overview
@@ -192,7 +196,7 @@ hello world!
 ```
 ]
 ---
-name: how
+name: basics-npm
 
 .left-column[
   ## 1. Basics
@@ -305,13 +309,14 @@ name: how
 
 - Use free resources available - not just for open source projects
 
-1. Free unlimited repos: github/gitlab/bitbucket
-2. Free static site hosting: gitlab
-3. Free server: gitlab?
-4. Free CDN: CloudFlare
-5. Free email send/receive: Mailgun
+1. Free Unlimited repos: [GitLab](https://about.gitlab.com/), [Bitbucket](https://bitbucket.org/)
+3. Free server: [GitLab](https://about.gitlab.com/)?
+4. Free CDN: [CloudFlare](https://www.cloudflare.com/)
+5. Free email send/receive: [MailGun](http://www.mailgun.com/)
+6. Email accounts through API: [TempMail](https://temp-mail.org/en/api) 
 ]
 ---
+name: basics-simple
 .left-column[
   ## 1. Basics
   ### Simple Server
@@ -474,6 +479,7 @@ describe("Basic HTTP Tests", function() {
 ]
 ---
 template: inverse
+name: nodejs
 
 # 2. NodeJS Ecosystem
 Language and Runtime
@@ -483,6 +489,7 @@ Language and Runtime
 - Libraries
 ]
 ---
+name: nodejs-language
 .left-column[
   ## 2. NodeJS
   ### Language
@@ -823,8 +830,10 @@ let deleted = Reflect.deleteProperty(target, 'foo');
 
 ]
 ---
+name: nodejs-runtime
 .left-column[
   ## 2. NodeJS
+  ### Language
   ### Runtime
   #### Overview
 ]
@@ -857,6 +866,7 @@ set NODE_ENV=production && npm start
 ---
 .left-column[
   ## 2. NodeJS
+  ### Language
   ### Runtime
   #### Overview
   #### API
@@ -894,6 +904,7 @@ fs.unlink('/tmp/hello', (err) => {
 ---
 .left-column[
   ## 2. NodeJS
+  ### Language
   ### Runtime
   #### Overview
   #### API
@@ -922,6 +933,7 @@ myEvent.emit('crzy', 'crazy event');
 ---
 .left-column[
   ## 2. NodeJS
+  ### Language
   ### Runtime
   #### Overview
   #### API
@@ -960,6 +972,7 @@ myEvent.emit('crzy', 'crazy event');
 ---
 .left-column[
   ## 2. NodeJS
+  ### Language
   ### Runtime
   #### Overview
   #### API
@@ -993,8 +1006,11 @@ console.log(sq(2));
 ```
 ]
 ---
+name: nodejs-libraries
 .left-column[
   ## 2. NodeJS
+  ### Language
+  ### Runtime
   ### Libraries
 ]
 .right-column[
@@ -1021,6 +1037,7 @@ console.log(sq(2));
 
 ---
 template: inverse
+name: quirks
 
 # 3. The Quirks
 The awesome things about JavaScript that may surprise you
@@ -1374,6 +1391,7 @@ for (let i = 0; i < 5; i++) {
 ]
 ---
 template: inverse
+name: promises
 
 # 4. Promises, promises
 Async code made easier
@@ -1384,6 +1402,7 @@ Async code made easier
 - Overhead
 ]
 ---
+name: promises-what
 .left-column[
   ## 4. Promises
   ### What?
@@ -1421,6 +1440,7 @@ console.log(user);   // user from DB
 
 ]
 ---
+name: promises-properties
 .left-column[
   ## 4. Promises
   ### What?
@@ -1462,6 +1482,7 @@ let promise = new Promise(function(resolve, reject) {
 ```
 ]
 ---
+name: promises-usage
 .left-column[
   ## 4. Promises
   ### What?
@@ -1568,6 +1589,7 @@ some().then(function(res) {
 
 ]
 ---
+name: promises-overhead
 .left-column[
   ## 4. Promises
   #### What?
@@ -1613,11 +1635,14 @@ promises-medikoo-deferred.js              4207      357.60
 ]
 ---
 template: inverse
+name: todo
 
 # 5. To Do Service
 A trivial service built with rigor and best practices
 .center-column[
-- Overview
+- Goal
+- API
+- Design
 - Components
 - Validation
 - Scripts
@@ -1625,10 +1650,10 @@ A trivial service built with rigor and best practices
 - Coverage
 ]
 ---
+name: todo-goal
 .left-column[
   ## 5. To Do Service
-  ### Overview
-  #### Goals
+  ### Goal
 ]
 .right-column[
 
@@ -1636,7 +1661,7 @@ A trivial service built with rigor and best practices
 
 - Store data in a DB (MySQL)
 
-- Consume a third party REST service in the microservice
+- Consume a third party REST service
 
 - Validate inputs and outputs against schema
 
@@ -1646,23 +1671,73 @@ A trivial service built with rigor and best practices
 
 - Measure code coverage
 
-- Test business critical business areas extensively
+- Use best practices
 
 ]
 ---
+name: todo-api
 .left-column[
   ## 5. To Do Service
-  ### Overview
-  #### Goals
-  #### Description
+  ### Goal
+  ### API
 ]
 .right-column[
 
 - REST service to store to-do list. 
 
-- To-do items and their Spanish translations are stored. Server uses [Yandex](https://translate.yandex.com/developers) service.
+- To-do items and their Spanish translations are stored. Server uses [Yandex Translation](https://translate.yandex.com/developers) service.
 
 - No users, accounts or authentication
+
+- All I/O in JSON
+
+- `GET /`
+
+```JSON
+[
+  {
+    "desc": "some description",
+    "trans": "alguna descripción",
+    "createdAt": "2016-08-20...",
+    "updatedAt": "2016-08-20..."
+  }
+]
+```
+
+- `POST /`
+
+```JSON
+"My wonderful todo item"
+```
+
+- `DELETE /{id}`
+
+]
+---
+name: todo-design
+.left-column[
+  ## 5. To Do Service
+  ### Goal
+  ### API
+  ### Design
+]
+.right-column[
+
+<img src="diagram.svg" width="100%">
+]
+---
+.left-column[
+  ## 5. To Do Service
+  ### Goal
+  ### API
+  ### Design
+  #### Plan
+]
+.right-column[
+
+- Build from bottom up - low-level components first, high-level later
+
+- Create tests for components along the way
 
 - Uses [Hapi framework](http://hapijs.com/api)
 
@@ -1680,16 +1755,13 @@ A trivial service built with rigor and best practices
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
-  #### Goals
-  #### Description
+  ### Goal
+  ### API
+  ### Design
   #### Plan
+  #### Getting started
 ]
 .right-column[
-
-- Build from bottom up - low-level components first, high-level later
-
-- Create tests for components along the way
 
 - `npm init` 
 
@@ -1719,9 +1791,12 @@ package.json
 
 ]
 ---
+name: todo-components
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
 ]
@@ -1765,7 +1840,9 @@ config.env = env;
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -1790,7 +1867,9 @@ module.exports = bunyan.createLogger(config.logger);
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -1828,7 +1907,9 @@ module.exports = (sequelize, DataTypes) => {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -1869,7 +1950,9 @@ for (const model of models) {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -1912,7 +1995,9 @@ describe("Models: Item", () => {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -1955,7 +2040,9 @@ lab -v test/model/item.js
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2003,7 +2090,9 @@ module.exports = (input) => {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2054,7 +2143,9 @@ lab -v test/util/translate.js
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2101,7 +2192,9 @@ module.exports = [get, post, del];
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2153,7 +2246,9 @@ const del = {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2186,7 +2281,9 @@ const config = require('../../config');
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   #### Config
   #### Logger
@@ -2230,9 +2327,12 @@ db.sequelize.sync()
 ```
 ]
 ---
+name: todo-validation
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   #### Input
@@ -2278,7 +2378,9 @@ const schema = require('../schema/item');
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   #### Input
@@ -2322,7 +2424,9 @@ lab -v -m 10000 test/controller/item.js
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   #### Input
@@ -2367,7 +2471,9 @@ module.exports.GET = {
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   #### Input
@@ -2392,9 +2498,12 @@ lab -v -m 10000 test/controller/item.js
 ```
 ]
 ---
+name: todo-scripts
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   ### Scripts
@@ -2422,9 +2531,12 @@ lab -v -m 10000 test/controller/item.js
 - All scripts can be run by `npm run <name>`
 ]
 ---
+name: todo-doc
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   ### Scripts
@@ -2469,7 +2581,9 @@ server.register([ Inert, Vision,
 ---
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   ### Scripts
@@ -2498,9 +2612,12 @@ server.register([ Inert, Vision,
 
 ]
 ---
+name: todo-coverage
 .left-column[
   ## 5. To Do Service
-  ### Overview
+  ### Goal
+  ### API
+  ### Design
   ### Components
   ### Validation
   ### Scripts
@@ -2536,7 +2653,7 @@ server.register([ Inert, Vision,
 ]
 ---
 
-name: last-page
+name: last
 template: inverse
 
 # The End
