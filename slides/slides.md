@@ -1592,10 +1592,10 @@ some().then(function(res) {
 name: promises-overhead
 .left-column[
   ## 4. Promises
-  #### What?
-  #### Properties
-  #### Usage
-  #### Overhead
+  ### What?
+  ### Properties
+  ### Usage
+  ### Overhead
 ]
 .right-column[
 
