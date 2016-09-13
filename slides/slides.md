@@ -177,6 +177,9 @@ sudo n stable
 ]
 .right-column[
 ####REPL (Read Eval Print Loop)
+
+- Extremely useful for checking out constructs 
+
 - `node` (equivalent to `php -a`)
 
 - ^C twice to exit
@@ -200,6 +203,7 @@ name: basics-npm
 
 .left-column[
   ## 1. Basics
+  ### Overview
   ### NPM
   #### What?
 ]
@@ -229,6 +233,7 @@ name: basics-npm
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
   ### NPM
   #### What?
   #### Workflow
@@ -266,6 +271,7 @@ name: basics-npm
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
   ### NPM
   #### What?
   #### Workflow
@@ -296,6 +302,7 @@ name: basics-npm
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
   ### NPM
   #### What?
   #### Workflow
@@ -319,10 +326,14 @@ name: basics-npm
 name: basics-simple
 .left-column[
   ## 1. Basics
+  ### Overview
+  ### NPM
   ### Simple Server
   #### Editor
 ]
 .right-column[
+- Enable ES6 in your editor
+
 ####WebStorm/PHPStorm
 
 - Preferences > Languages & Frameworks > JavaScript > JavaScript language version > ECMAScript 6
@@ -346,6 +357,8 @@ name: basics-simple
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
+  ### NPM
   ### Simple Server
   #### Editor
   #### Creating
@@ -387,6 +400,8 @@ server.start(function(err) {
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
+  ### NPM
   ### Simple Server
   #### Editor
   #### Creating
@@ -415,6 +430,8 @@ server.start(function(err) {
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
+  ### NPM
   ### Simple Server
   #### Editor
   #### Creating
@@ -457,6 +474,8 @@ describe("Basic HTTP Tests", function() {
 ---
 .left-column[
   ## 1. Basics
+  ### Overview
+  ### NPM
   ### Simple Server
   #### Editor
   #### Creating
@@ -478,6 +497,30 @@ describe("Basic HTTP Tests", function() {
 <img src="coverage.png" width="100%">
 ]
 ---
+.left-column[
+  ## 1. Basics
+  ### Overview
+  ### NPM
+  ### Simple Server
+  ### Recap
+]
+.right-column[
+####Questions?
+
+####Quizzes
+
+What could be the reason for?
+
+- `EACCES` during `npm install -g ...`
+
+- Error running `npm run myscript`
+
+- Error starting server `EADDRINUSE`
+
+- `Error: Cannot find module '...'`
+
+]
+---
 template: inverse
 name: nodejs
 
@@ -496,6 +539,8 @@ name: nodejs-language
   #### Basics
 ]
 .right-column[
+
+- C like permissive language
 
 - Declaration: `const`, `let` - block scoped, preferred
 
@@ -928,6 +973,7 @@ myEvent.on('crzy', function(name) {
 // Send out an event
 myEvent.emit('crzy', 'crazy event');
 ```
+
 ]
 
 ---
@@ -1033,6 +1079,33 @@ name: nodejs-libraries
 
 - Production: [`pm2`](http://pm2.keymetrics.io/)
 
+]
+
+---
+.left-column[
+  ## 2. NodeJS
+  ### Language
+  ### Runtime
+  ### Libraries
+  ### Recap
+]
+.right-column[
+
+####Questions?
+
+####Quizzes
+
+What would they output?
+
+```JavaScript
+console.log(Boolean([]));
+console.log(!!{});
+console.log('1' == 1);
+console.log('1' === 1);
+console.log([3].map(a => 2*a));
+let b=[]; b.a=5; console.log(b.map(a => 2*a));
+console.log((a=>a*2)(2));
+```
 ]
 
 ---
@@ -1389,6 +1462,23 @@ for (let i = 0; i < 5; i++) {
 
 - More details at [MDN let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
 ]
+---
+.left-column[
+  ## 3. Quirks
+  ### Quiet
+  ### Single threaded
+  ### Objects v. Primitives
+  ### `this`
+  ### Sequential I/O
+  ### Exceptions
+  ### Closures
+  ### Recap
+]
+.right-column[
+
+####Questions?
+]
+
 ---
 template: inverse
 name: promises
